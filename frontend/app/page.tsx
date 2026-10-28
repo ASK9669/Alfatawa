@@ -266,9 +266,9 @@ export default function Home() {
             Afaan Oromoo Islamic Fatwa Platform · Afaan Oromoo · العربية
           </p>
 
-          <p className="mt-4">
+          {/* <p className="mt-4">
             © {new Date().getFullYear()} Al-Fataawaa
-          </p>
+          </p> */}
         </div>
       </footer>
     </main>
