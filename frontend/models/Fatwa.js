@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const fatwaSchema = new mongoose.Schema(
   {
@@ -8,17 +8,18 @@ const fatwaSchema = new mongoose.Schema(
     titleArabic: String,
     questionOromo: { type: String, required: true, maxlength: 2000 },
     answerOromo: String,
+    category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
     youtubeUrl: String,
     status: {
       type: String,
-      enum: ["Pending", "Draft", "Published", "Rejected"],
-      default: "Pending",
+      enum: ['Pending', 'Draft', 'Published', 'Rejected'],
+      default: 'Pending',
     },
     askerEmail: { type: String, select: false },
     notifyAsker: { type: Boolean, default: false },
     publishedAt: Date,
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
-export default mongoose.models.Fatwa || mongoose.model("Fatwa", fatwaSchema);
+export default mongoose.models.Fatwa || mongoose.model('Fatwa', fatwaSchema);

@@ -1,18 +1,18 @@
+import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import { connectDB } from '@/lib/db';
 import Fatwa from '@/models/Fatwa';
 import YouTubeEmbed from '@/components/YouTubeEmbed';
 
-export default async function FatwaPage({ params }) {
+async function FatwaContent({ params }) {
   const { slug } = await params;
 
   await connectDB();
   const fatwa = await Fatwa.findOne({ slug, status: 'Published' }).lean();
-
   if (!fatwa) notFound();
 
   return (
-    <main className="mx-auto max-w-3xl space-y-6 p-4">
+    <>
       <p className="text-sm text-gray-500">Fatwa No. {fatwa.number}</p>
       <h1 className="text-2xl font-bold">{fatwa.titleOromo}</h1>
 
@@ -27,6 +27,16 @@ export default async function FatwaPage({ params }) {
       </section>
 
       <YouTubeEmbed url={fatwa.youtubeUrl} />
+    </>
+  );
+}
+
+export default function FatwaPage({ params }) {
+  return (
+    <main className="mx-auto max-w-3xl space-y-6 p-4">
+      <Suspense fallback={<p>Loading...</p>}>
+        <FatwaContent params={params} />
+      </Suspense>
     </main>
   );
 }
