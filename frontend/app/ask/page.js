@@ -1,15 +1,19 @@
 'use client';
 
 import { useState } from 'react';
+import { ui } from '@/lib/ui';
 
 export default function AskPage() {
   const [status, setStatus] = useState('idle'); // idle | sending | done | error
   const [message, setMessage] = useState('');
+  const [length, setLength] = useState(0);
 
   async function handleSubmit(e) {
     e.preventDefault();
+    const formEl = e.currentTarget;
     setStatus('sending');
-    const form = new FormData(e.target);
+    setMessage('');
+    const form = new FormData(formEl);
 
     try {
       const res = await fetch('/api/questions', {
@@ -26,7 +30,8 @@ export default function AskPage() {
 
       if (res.ok) {
         setStatus('done');
-        e.target.reset();
+        formEl.reset();
+        setLength(0);
       } else {
         setStatus('error');
         setMessage(data.error || 'Something went wrong.');
@@ -39,66 +44,60 @@ export default function AskPage() {
 
   if (status === 'done') {
     return (
-      <main className="mx-auto max-w-xl p-4">
-        <p className="rounded-lg border p-4">
+      <main className="mx-auto max-w-xl px-4 py-10">
+        <div role="status" className={ui.success}>
           Your question was sent. Thank you.
+        </div>
+        <p className="mt-4 text-muted">
+          The Sheikh reviews every question before an answer is published.
         </p>
+        <button type="button" onClick={() => setStatus('idle')} className={`${ui.secondary} mt-6`}>
+          Send another question
+        </button>
       </main>
     );
   }
 
   return (
-    <main className="mx-auto max-w-xl p-4">
-      <h1 className="mb-4 text-2xl font-bold">Ask the Mufti</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <main className="mx-auto max-w-xl px-4 py-10">
+      <h1 className="text-3xl font-semibold tracking-tight">Ask the Mufti</h1>
+      <p className="mt-2 text-muted">Write your question clearly. You do not need to give your name.</p>
+
+      <form onSubmit={handleSubmit} className="mt-8 space-y-6">
         <div>
-          <label htmlFor="question" className="mb-1 block font-semibold">
-            Your question
-          </label>
+          <label htmlFor="question" className={ui.label}>Your question</label>
           <textarea
             id="question"
             name="question"
             required
             minLength={5}
             maxLength={2000}
-            rows={6}
-            className="w-full rounded-lg border p-2"
+            rows={7}
+            onChange={(e) => setLength(e.target.value.length)}
+            className={ui.input}
           />
+          <p className={`${ui.hint} text-end`}>{length} / 2000</p>
         </div>
 
         <div>
-          <label htmlFor="email" className="mb-1 block font-semibold">
-            Email (optional)
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            className="w-full rounded-lg border p-2"
-          />
+          <label htmlFor="email" className={ui.label}>Email (optional)</label>
+          <input id="email" name="email" type="email" autoComplete="email" className={ui.input} />
+          <p className={ui.hint}>It is never shown on the website.</p>
         </div>
 
-        <label className="flex items-center gap-2">
-          <input type="checkbox" name="notify" />
-          Notify me by email when my question is answered
+        <label className="flex items-start gap-3">
+          <input type="checkbox" name="notify" className="mt-1.5 h-4 w-4 accent-primary" />
+          <span>Notify me by email when my question is answered</span>
         </label>
 
         {/* honeypot: hidden from people, bots fill it */}
-        <input
-          type="text"
-          name="website"
-          tabIndex={-1}
-          autoComplete="off"
-          className="hidden"
-        />
+        <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" />
 
-        {status === 'error' && <p className="text-red-600">{message}</p>}
+        {status === 'error' && (
+          <p role="alert" className={ui.error}>{message}</p>
+        )}
 
-        <button
-          type="submit"
-          disabled={status === 'sending'}
-          className="rounded-lg bg-primary hover:bg-primary-strong px-4 py-2 text-white disabled:opacity-50"
-        >
+        <button type="submit" disabled={status === 'sending'} className={ui.primary}>
           {status === 'sending' ? 'Sending...' : 'Send question'}
         </button>
       </form>

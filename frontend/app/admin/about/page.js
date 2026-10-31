@@ -13,7 +13,6 @@ async function Content() {
   await connectDB();
   const a = await About.findOne({ key: 'sheikh' }).lean();
 
-  // plain strings for the client form
   const about = {
     nameOromo: a?.nameOromo || '',
     nameArabic: a?.nameArabic || '',
@@ -26,9 +25,11 @@ async function Content() {
   };
 
   return (
-    <main className="mx-auto max-w-3xl space-y-4 p-4">
-      <Link href="/admin" className="text-sm underline">Back to dashboard</Link>
-      <h1 className="text-2xl font-bold">Edit the About the Sheikh page</h1>
+    <main className="mx-auto max-w-3xl px-4 py-8">
+      <Link href="/admin" className="text-sm font-medium text-primary hover:underline">
+        Back to dashboard
+      </Link>
+      <h1 className="mt-4 text-3xl font-semibold tracking-tight">Edit the About page</h1>
       <AboutForm about={about} />
     </main>
   );
@@ -36,7 +37,7 @@ async function Content() {
 
 export default function Page() {
   return (
-    <Suspense fallback={<p className="p-4">Loading...</p>}>
+    <Suspense fallback={<p className="p-4 text-muted">Loading...</p>}>
       <Content />
     </Suspense>
   );

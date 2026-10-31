@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ui } from '@/lib/ui';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -12,7 +13,7 @@ export default function LoginPage() {
     e.preventDefault();
     setSending(true);
     setError('');
-    const form = new FormData(e.target);
+    const form = new FormData(e.currentTarget);
 
     const res = await fetch('/api/auth/login', {
       method: 'POST',
@@ -34,25 +35,24 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="mx-auto max-w-sm p-4">
-      <h1 className="mb-4 text-2xl font-bold">Admin login</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="email" className="mb-1 block font-semibold">Email</label>
-          <input id="email" name="email" type="email" required
-            className="w-full rounded-lg border p-2" />
-        </div>
-        <div>
-          <label htmlFor="password" className="mb-1 block font-semibold">Password</label>
-          <input id="password" name="password" type="password" required
-            className="w-full rounded-lg border p-2" />
-        </div>
-        {error && <p className="text-red-600">{error}</p>}
-        <button type="submit" disabled={sending}
-          className="rounded-lg bg-primary hover:bg-primary-strong px-4 py-2 text-white disabled:opacity-50">
-          {sending ? 'Signing in...' : 'Sign in'}
-        </button>
-      </form>
+    <main className="mx-auto max-w-sm px-4 py-12">
+      <div className="rounded-lg border bg-surface p-6">
+        <h1 className="text-2xl font-semibold tracking-tight">Admin login</h1>
+        <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+          <div>
+            <label htmlFor="email" className={ui.label}>Email</label>
+            <input id="email" name="email" type="email" required autoComplete="username" className={ui.input} />
+          </div>
+          <div>
+            <label htmlFor="password" className={ui.label}>Password</label>
+            <input id="password" name="password" type="password" required autoComplete="current-password" className={ui.input} />
+          </div>
+          {error && <p role="alert" className={ui.error}>{error}</p>}
+          <button type="submit" disabled={sending} className={`${ui.primary} w-full`}>
+            {sending ? 'Signing in...' : 'Sign in'}
+          </button>
+        </form>
+      </div>
     </main>
   );
 }

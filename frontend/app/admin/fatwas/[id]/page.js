@@ -25,7 +25,6 @@ async function Content({ params }) {
     nameOromo: c.nameOromo,
   }));
 
-  // plain object for the client component
   const fatwa = {
     id: String(f._id),
     number: f.number || null,
@@ -38,9 +37,11 @@ async function Content({ params }) {
   };
 
   return (
-    <main className="mx-auto max-w-3xl space-y-4 p-4">
-      <Link href="/admin" className="text-sm underline">Back to inbox</Link>
-      <h1 className="text-2xl font-bold">
+    <main className="mx-auto max-w-3xl px-4 py-8">
+      <Link href="/admin" className="text-sm font-medium text-primary hover:underline">
+        Back to dashboard
+      </Link>
+      <h1 className="mt-4 text-3xl font-semibold tracking-tight">
         {fatwa.number ? `Fatwa No. ${fatwa.number}` : 'New question'}
       </h1>
       <AnswerForm fatwa={fatwa} categories={categories} />
@@ -50,7 +51,7 @@ async function Content({ params }) {
 
 export default function Page({ params }) {
   return (
-    <Suspense fallback={<p className="p-4">Loading...</p>}>
+    <Suspense fallback={<p className="p-4 text-muted">Loading...</p>}>
       <Content params={params} />
     </Suspense>
   );

@@ -1,6 +1,25 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
 import NavLinks from './NavLinks';
 import { SITE_NAME, LINKS } from '@/lib/site';
+
+// shown for an instant while the browser works out which page is open
+function PlainLinks() {
+  return (
+    <ul className="-mx-2 flex gap-1 overflow-x-auto">
+      {LINKS.map((l) => (
+        <li key={l.href}>
+          <Link
+            href={l.href}
+            className="block whitespace-nowrap rounded-md px-3 py-2.5 text-sm font-medium hover:bg-primary/10"
+          >
+            {l.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export default function SiteHeader() {
   return (
@@ -10,7 +29,9 @@ export default function SiteHeader() {
           {SITE_NAME}
         </Link>
         <nav aria-label="Main menu" className="mt-2 sm:mt-0">
-          <NavLinks links={LINKS} />
+          <Suspense fallback={<PlainLinks />}>
+            <NavLinks links={LINKS} />
+          </Suspense>
         </nav>
       </div>
     </header>
