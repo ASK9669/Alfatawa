@@ -49,7 +49,7 @@ export default function LoginPage() {
         </div>
         {error && <p className="text-red-600">{error}</p>}
         <button type="submit" disabled={sending}
-          className="rounded-lg bg-black px-4 py-2 text-white disabled:opacity-50">
+          className="rounded-lg bg-primary hover:bg-primary-strong px-4 py-2 text-white disabled:opacity-50">
           {sending ? 'Signing in...' : 'Sign in'}
         </button>
       </form>

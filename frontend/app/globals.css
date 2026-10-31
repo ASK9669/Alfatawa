@@ -1,6 +1,44 @@
 @import "tailwindcss";
 
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+:root {
+  --paper: #f7f9f8;
+  --surface: #ffffff;
+  --ink: #18292a;
+  --muted: #55675f;
+  --line: #dce5e1;
+  --primary: #0f5c47;
+  --primary-strong: #0a4637;
+  --accent: #a8641a;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-accent: var(--accent);
+}
+
+@layer base {
+  /* Tailwind 4 draws borders in black by default; use our soft line color */
+  *,
+  ::after,
+  ::before {
+    border-color: var(--line);
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-plex), var(--font-plex-arabic), system-ui, sans-serif;
+    line-height: 1.65;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
 }

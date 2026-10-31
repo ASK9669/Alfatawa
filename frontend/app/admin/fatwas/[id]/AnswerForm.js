@@ -45,7 +45,7 @@ export default function AnswerForm({ fatwa, categories }) {
 
   return (
     <form className="space-y-4">
-      <p className="text-sm text-gray-500">Status: {saved.status}</p>
+      <p className="text-sm text-muted">Status: {saved.status}</p>
 
       <div>
         <label htmlFor="questionOromo" className="mb-1 block font-semibold">Question</label>
@@ -90,7 +90,7 @@ export default function AnswerForm({ fatwa, categories }) {
           Save draft
         </button>
         <button type="button" disabled={busy} onClick={(e) => save(e, 'Published')}
-          className="rounded-lg bg-black px-4 py-2 text-white disabled:opacity-50">
+          className="rounded-lg bg-primary hover:bg-primary-strong px-4 py-2 text-white disabled:opacity-50">
           Publish
         </button>
         <button type="button" disabled={busy}

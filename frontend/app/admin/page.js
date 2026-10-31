@@ -11,9 +11,9 @@ function FatwaRow({ f }) {
     <li>
       <Link
         href={`/admin/fatwas/${String(f._id)}`}
-        className="block rounded-lg border p-3 hover:bg-gray-50"
+        className="block rounded-lg border p-3 hover:bg-surface"
       >
-        <span className="text-xs text-gray-500">
+        <span className="text-xs text-muted">
           {f.status}
           {f.number ? ` | Fatwa No. ${f.number}` : ''}
         </span>
