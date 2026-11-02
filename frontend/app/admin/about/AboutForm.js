@@ -58,6 +58,9 @@ export default function AboutForm({ about }) {
           Put the image file in the project&apos;s public folder and write its name here, or use an https:// address.
         </p>
       </div>
+ 
+      
+
 
       <div>
         <label htmlFor="biographyOromo" className={label}>Biography (Afaan Oromoo)</label>

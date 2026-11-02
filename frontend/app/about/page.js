@@ -28,6 +28,7 @@ async function AboutContent() {
         )}
         <h1 className="text-2xl font-bold">{a.nameOromo}</h1>
       </div>
+      <div><a href= "https://youtu.be/fUkEYT1QEII?si=grK9ck8zyoZQsF-P" target="_blank" rel="noopener noreferrer">Seenaa Sheekaa </a></div>
 
       {a.biographyOromo && (
         <section>
