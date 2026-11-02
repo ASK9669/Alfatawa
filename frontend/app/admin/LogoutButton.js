@@ -14,7 +14,7 @@ export default function LogoutButton() {
 
   return (
     <button type="button" onClick={logout} className={ui.secondary}>
-      Log out
+      Keessaa Bahi
     </button>
   );
 }

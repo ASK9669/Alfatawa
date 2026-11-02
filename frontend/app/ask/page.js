@@ -11,7 +11,7 @@ export default function AskPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     const formEl = e.currentTarget;
-    setStatus('sending');
+    setStatus('Ergamaa jira');
     setMessage('');
     const form = new FormData(formEl);
 
@@ -46,13 +46,13 @@ export default function AskPage() {
     return (
       <main className="mx-auto max-w-xl px-4 py-10">
         <div role="status" className={ui.success}>
-          Your question was sent. Thank you.
+          Gaafiin milkaa'inaan ergameera. Galatoomaa.
         </div>
         <p className="mt-4 text-muted">
-          The Sheikh reviews every question before an answer is published.
+          Gaafiin ilaalame yeroo gabaabaa keessatti deebiin isaa ni maxxanafama.
         </p>
         <button type="button" onClick={() => setStatus('idle')} className={`${ui.secondary} mt-6`}>
-          Send another question
+          Gaafiin biraa ergi
         </button>
       </main>
     );
@@ -82,12 +82,12 @@ export default function AskPage() {
         <div>
           <label htmlFor="email" className={ui.label}>Email (optional)</label>
           <input id="email" name="email" type="email" autoComplete="email" className={ui.input} />
-          <p className={ui.hint}>It is never shown on the website.</p>
+          <p className={ui.hint}>you email is never shown on the website.</p>
         </div>
 
         <label className="flex items-start gap-3">
-          <input type="checkbox" name="notify" className="mt-1.5 h-4 w-4 accent-primary" />
-          <span>Notify me by email when my question is answered</span>
+          <input type="checkbox" defaultChecked name="notify" className="mt-1.5 h-4 w-4 accent-primary" />
+          <span>Deebiin isaa karaa Emailii tiin na haa qaqqabu</span>
         </label>
 
         {/* honeypot: hidden from people, bots fill it */}
@@ -98,7 +98,7 @@ export default function AskPage() {
         )}
 
         <button type="submit" disabled={status === 'sending'} className={ui.primary}>
-          {status === 'sending' ? 'Sending...' : 'Send question'}
+          {status === 'sending' ? 'Sending...' : 'gaafii Ergi'}
         </button>
       </form>
     </main>

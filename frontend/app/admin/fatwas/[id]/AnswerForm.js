@@ -69,11 +69,11 @@ export default function AnswerForm({ fatwa, categories }) {
             <option key={c.id} value={c.id}>{c.nameOromo}</option>
           ))}
         </select>
-        <p className={ui.hint}>A category is required to publish.</p>
+        <p className={ui.hint}>tokko filachuun dirqama.</p>
       </div>
 
       <div>
-        <label htmlFor="answerOromo" className={ui.label}>Answer</label>
+        <label htmlFor="answerOromo" className={ui.label}>Deebii</label>
         <textarea id="answerOromo" name="answerOromo" rows={12}
           defaultValue={fatwa.answerOromo} className={`${ui.input} leading-7`} />
       </div>
@@ -89,24 +89,24 @@ export default function AnswerForm({ fatwa, categories }) {
         {saved.status === 'Published' && saved.slug && (
           <a href={`/fatwas/${saved.slug}`} target="_blank" rel="noreferrer"
             className="inline-block text-sm font-medium text-primary underline">
-            View on the website
+          Weebsaayitii irratti Ilaali
           </a>
         )}
       </div>
 
       <div className="flex flex-wrap gap-3 border-t pt-6">
         <button type="button" disabled={busy} onClick={(e) => save(e, 'Published')} className={ui.primary}>
-          Publish
+          Maxxansi
         </button>
         <button type="button" disabled={busy} onClick={(e) => save(e, 'Draft')} className={ui.secondary}>
-          Save draft
+          yeroof kaayi
         </button>
         <button type="button" disabled={busy}
           onClick={(e) => {
             if (confirm('Reject this question? It will not be published.')) save(e, 'Rejected');
           }}
           className={`${ui.danger} sm:ms-auto`}>
-          Reject
+          Haqi
         </button>
       </div>
     </form>

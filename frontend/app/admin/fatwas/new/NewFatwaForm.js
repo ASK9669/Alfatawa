@@ -57,23 +57,23 @@ export default function NewFatwaForm({ categories }) {
   return (
     <form className="mt-6 space-y-6">
       <div>
-        <label htmlFor="questionOromo" className={ui.label}>Question</label>
+        <label htmlFor="questionOromo" className={ui.label}>Gaafi</label>
         <textarea id="questionOromo" name="questionOromo" rows={5} maxLength={2000} className={ui.input} />
       </div>
 
       <div>
-        <label htmlFor="category" className={ui.label}>Category</label>
+        <label htmlFor="category" className={ui.label}>Qoodama</label>
         <select id="category" name="category" defaultValue="" className={ui.input}>
           <option value="">Choose a category</option>
           {categories.map((c) => (
             <option key={c.id} value={c.id}>{c.nameOromo}</option>
           ))}
         </select>
-        <p className={ui.hint}>A category is required to publish.</p>
+        <p className={ui.hint}>Tokko filachuun Dirqama </p>
       </div>
 
       <div>
-        <label htmlFor="answerOromo" className={ui.label}>Answer</label>
+        <label htmlFor="answerOromo" className={ui.label}>Deebii</label>
         <textarea id="answerOromo" name="answerOromo" rows={12} className={`${ui.input} leading-7`} />
       </div>
 
@@ -86,7 +86,7 @@ export default function NewFatwaForm({ categories }) {
         {error && <p role="alert" className={ui.error}>{error}</p>}
         {draftId && (
           <Link href={`/admin/fatwas/${draftId}`} className="inline-block text-sm font-medium text-primary underline">
-            Open the saved draft
+            Draft
           </Link>
         )}
       </div>
@@ -96,7 +96,7 @@ export default function NewFatwaForm({ categories }) {
           {busy ? 'Saving...' : 'Publish'}
         </button>
         <button type="button" disabled={busy} onClick={(e) => submit(e, false)} className={ui.secondary}>
-          Save draft
+          yeroof kaayi
         </button>
       </div>
     </form>

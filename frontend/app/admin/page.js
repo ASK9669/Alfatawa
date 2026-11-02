@@ -80,16 +80,19 @@ async function Dashboard() {
 
       <nav aria-label="Admin links" className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm">
         <Link href="/admin/about" className="font-medium text-primary hover:underline">
-          Edit the About page
+          Edit godhi 
         </Link>
         <Link href="/" className="font-medium text-primary hover:underline">
-          View the website
+          Website Ilaali
         </Link>
                 <Link href="/admin/fatwas/new" className="font-medium text-primary hover:underline">
-          New fatwa
+          Fatwaa Haaraa Maxxansi
         </Link>
         <Link href="/admin/import" className="font-medium text-primary hover:underline">
-          Import fatwas
+          Fatwaa Haaraa olbaasi
+        </Link>
+                <Link href="/admin/youtube" className="font-medium text-primary hover:underline">
+          YouTube 
         </Link>
       </nav>
 
@@ -102,7 +105,7 @@ async function Dashboard() {
       <section className="mt-10">
         <h2 className="text-lg font-semibold">Inbox ({inbox.length})</h2>
         {inbox.length === 0 ? (
-          <p className="mt-3 text-muted">No questions are waiting.</p>
+          <p className="mt-3 text-muted">Gaafiin haaraa ergame hin jiru </p>
         ) : (
           <ul className="mt-3 divide-y border-y">
             {inbox.map((f) => <FatwaRow key={String(f._id)} f={f} />)}
@@ -111,9 +114,9 @@ async function Dashboard() {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-lg font-semibold">Latest published</h2>
+        <h2 className="text-lg font-semibold">kan Dhiyoo maxxanfaman </h2>
         {published.length === 0 ? (
-          <p className="mt-3 text-muted">Nothing is published yet.</p>
+          <p className="mt-3 text-muted">homaa hin jiru</p>
         ) : (
           <ul className="mt-3 divide-y border-y">
             {published.map((f) => <FatwaRow key={String(f._id)} f={f} />)}

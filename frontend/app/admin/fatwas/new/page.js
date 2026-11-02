@@ -17,11 +17,11 @@ async function Content() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-8">
       <Link href="/admin" className="text-sm font-medium text-primary hover:underline">
-        Back to dashboard
+        Back
       </Link>
-      <h1 className="mt-4 text-3xl font-semibold tracking-tight">New fatwa</h1>
+      <h1 className="mt-4 text-3xl font-semibold tracking-tight">Fatwaa Haaraa</h1>
       <p className="mt-2 text-muted">
-        Write the question and the answer. The fatwa number is given automatically when you publish.
+        Gaafi keetiifi Deebii isaa barreessi.
       </p>
       <NewFatwaForm categories={categories} />
     </main>

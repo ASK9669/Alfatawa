@@ -9,7 +9,7 @@ async function AboutContent() {
   await connection();   // new line: "build this page when someone visits it"
   await connectDB();
   const a = await About.findOne({ key: 'sheikh' }).lean();
-  if (!a) return <p>This page is coming soon.</p>;
+  if (!a) return <p>fuulli kun yeroo gabaaabaa keessatti gadi lakkifam</p>;
   // ...the rest of the file stays exactly the same
   
   const education = a.education || [];

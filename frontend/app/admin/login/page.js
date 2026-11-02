@@ -37,15 +37,15 @@ export default function LoginPage() {
   return (
     <main className="mx-auto max-w-sm px-4 py-12">
       <div className="rounded-lg border bg-surface p-6">
-        <h1 className="text-2xl font-semibold tracking-tight">Admin login</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Admin Qofaafi</h1>
         <form onSubmit={handleSubmit} className="mt-6 space-y-5">
           <div>
             <label htmlFor="email" className={ui.label}>Email</label>
-            <input id="email" name="email" type="email" required autoComplete="username" className={ui.input} />
+            <input id="email" placeholder="email kee galchi" name="email" type="email" required autoComplete="username" className={ui.input} />
           </div>
           <div>
             <label htmlFor="password" className={ui.label}>Password</label>
-            <input id="password" name="password" type="password" required autoComplete="current-password" className={ui.input} />
+            <input id="password" placeholder="password galchi" name="password" type="password" required autoComplete="current-password" className={ui.input} />
           </div>
           {error && <p role="alert" className={ui.error}>{error}</p>}
           <button type="submit" disabled={sending} className={`${ui.primary} w-full`}>
