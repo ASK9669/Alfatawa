@@ -3,21 +3,29 @@ import { SITE_NAME, LINKS } from '@/lib/site';
 
 export default function SiteFooter() {
   return (
-    <footer className="mt-16 border-t bg-surface">
+    <footer className="mt-16 border-t bg-black text-sm text-white">
       <div className="mx-auto grid max-w-3xl gap-6 p-6 sm:grid-cols-2">
         <div>
-          <p className="font-semibold text-primary">{SITE_NAME}</p>
-          <p className="mt-1 text-sm text-muted">
-           Gaafileen gaafachuuf,sagantaalee biroo aragchuufi odeeffannoo dabalataa argachuuf, marsariitii keenya daawwadhaa.
+          <p className="mt-1 font-semibold text-sm text-white">
+           Odeeffannoo Dabalataaf:
           </p>
         </div>
-        <ul className="space-y-1 text-sm sm:text-right">
-          {LINKS.filter((l) => l.href !== '/').map((l) => (
-            <li key={l.href}>
-              <Link href={l.href} className="hover:underline">{l.label}</Link>
-            </li>
-          ))}
-        </ul>
+       <div className="flex flex-col gap-2 ">
+          <ul className="flex flex-wrap gap-2 ">
+              <div className='hover:text-blue-500'><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                Facebook
+              </a></div>
+            <div className='hover:text-blue-500'><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                Facebook
+              </a></div>
+            <div className='hover:text-blue-500'><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                Facebook
+              </a></div>
+              <div className='hover:text-blue-500'><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                Facebook 
+              </a></div>
+          </ul>
+        </div>
       </div>
     </footer>
   );

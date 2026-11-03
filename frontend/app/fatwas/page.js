@@ -57,7 +57,6 @@ async function FatwaBrowser({ searchParams }) {
   if (current) filter.category = current._id;
   const search = buildSearchFilter(q);
   if (search) Object.assign(filter, search);
-
   const total = await Fatwa.countDocuments(filter);
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
   const page = Math.min(requestedPage, totalPages);

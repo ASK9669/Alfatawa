@@ -2,8 +2,8 @@ export const SITE_NAME = 'Alfataawaa Afaan Oromoo'; // placeholder: change to th
 
 export const LINKS = [
   { href: '/', label: 'Home' },
-  { href: '/fatwas', label: 'Fatwas' },
-  { href: '/ask', label: 'Ask the Mufti' },
-  { href: '/about', label: 'About the Sheikh' },
+  { href: '/fatwas', label: 'Fatwaalee' },
+  { href: '/ask', label: 'Muftii Gaafadhu' },
+  { href: '/about', label: 'Seenaa Gabaabaa' },
   { href: '/youtube', label: 'YouTube' },
 ];
