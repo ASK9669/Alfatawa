@@ -17,6 +17,7 @@ const fatwaSchema = new mongoose.Schema(
     },
     askerEmail: { type: String, select: false },
     notifyAsker: { type: Boolean, default: false },
+    notifiedAt: Date,
     publishedAt: Date,
   },
   { timestamps: true }

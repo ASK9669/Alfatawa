@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import mongoose from 'mongoose';
 import { connectDB } from '@/lib/db';
 import { getAdminFromCookie } from '@/lib/auth';
+import { sendEmail } from '@/lib/email';
 import { getYouTubeId } from '@/components/YouTubeEmbed';
 import Fatwa from '@/models/Fatwa';
 import Counter from '@/models/Counter';
@@ -58,7 +59,8 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ error: 'Category not found.' }, { status: 400 });
     }
 
-    const fatwa = await Fatwa.findById(id);
+    // +askerEmail: the email is hidden by default, so we ask for it explicitly
+    const fatwa = await Fatwa.findById(id).select('+askerEmail');
     if (!fatwa) {
       return NextResponse.json({ error: 'Not found.' }, { status: 404 });
     }
@@ -90,11 +92,38 @@ export async function PUT(request, { params }) {
 
     await fatwa.save();
 
+    // 5. tell the asker (only once, only if they asked for it)
+    let emailStatus = 'not_requested';
+    if (status === 'Published' && fatwa.notifyAsker && fatwa.askerEmail) {
+      if (fatwa.notifiedAt) {
+        emailStatus = 'already_sent';
+      } else {
+        const siteUrl = process.env.SITE_URL || 'http://localhost:3000';
+        const result = await sendEmail({
+          to: fatwa.askerEmail,
+          subject: `Your question was answered (Fatwa No. ${fatwa.number})`,
+          text:
+            `Your question has been answered.\n\n` +
+            `Read the answer here:\n${siteUrl}/fatwas/${fatwa.slug}\n\n` +
+            `You received this message because you asked a question on our website ` +
+            `and chose to be notified. We use your email address only for this message.\n`,
+        });
+        if (result.ok) {
+          fatwa.notifiedAt = new Date();
+          await fatwa.save();
+          emailStatus = 'sent';
+        } else {
+          emailStatus = 'failed';
+        }
+      }
+    }
+
     return NextResponse.json({
       ok: true,
       number: fatwa.number,
       slug: fatwa.slug,
       status: fatwa.status,
+      emailStatus,
     });
   } catch (error) {
     console.error('PUT /api/admin/fatwas/[id] failed:', error);

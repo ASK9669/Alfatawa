@@ -1,6 +1,7 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { connectDB } from '@/lib/db';
 import Fatwa from '@/models/Fatwa';
+import { sendEmail } from '@/lib/email';
 
 // simple rate limit: max 5 questions per IP in 10 minutes
 const hits = new Map();
@@ -41,11 +42,28 @@ export async function POST(request) {
     }
 
     await connectDB();
-    await Fatwa.create({
+    const saved = await Fatwa.create({
       questionOromo: question,
       askerEmail: email || undefined,
       notifyAsker: Boolean(email && body.notify),
       status: 'Pending',
+    });
+
+    // email the Sheikh AFTER the response is sent, so a mail problem
+    // never slows down or breaks the asker's submission
+    after(async () => {
+      const to = process.env.ADMIN_NOTIFY_EMAIL;
+      if (!to) return;
+      const siteUrl = process.env.SITE_URL || 'http://localhost:3000';
+      const preview = question.length > 500 ? `${question.slice(0, 500)}...` : question;
+      await sendEmail({
+        to,
+        subject: 'New question received',
+        text:
+          `A new question was submitted:\n\n${preview}\n\n` +
+          `Open it to write the answer (login required):\n` +
+          `${siteUrl}/admin/fatwas/${saved._id}\n`,
+      });
     });
 
     return NextResponse.json({ ok: true }, { status: 201 });

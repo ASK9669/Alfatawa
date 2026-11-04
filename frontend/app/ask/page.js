@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ui } from "@/lib/ui";
+import Link from "next/link";
 
 export default function AskPage() {
   const [status, setStatus] = useState("idle");
@@ -48,69 +49,10 @@ export default function AskPage() {
   return (
     <main className="min-h-screen bg-[#f7f8f2] px-4 py-10 sm:px-6 lg:px-8">
       {/* Page introduction */}
-      <div className="mx-auto mb-10 max-w-5xl text-center">
-        <span className="mb-3 inline-block rounded-full bg-[#e5f1e8] px-4 py-2 text-sm font-semibold text-[#087443]">
-          Al-Fataawaa Islamic Fatwa Program
-        </span>
-
-        <h1 className="text-3xl font-bold tracking-tight text-[#064e35] sm:text-4xl">
-          Ask the Mufti
-        </h1>
-
-        <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-gray-600 sm:text-base">
-          Have a question about Islam? Submit your question and receive
-          authentic Islamic guidance from qualified scholars.
-        </p>
-      </div>
 
       {/* Main content */}
-      <div className="mx-auto grid max-w-6xl items-start gap-8 lg:grid-cols-2">
+      <div className="mx-auto  max-w-6xl lg:grid-cols-2">
         {/* Left: Islamic poster and information */}
-        <section className="space-y-5">
-          <div className="overflow-hidden rounded-3xl border border-[#e5d8a9] bg-white shadow-lg">
-            <img
-              src="/ask-mufti-banner.png"
-              alt="Al-Fataawaa Ask Mufti Islamic guidance poster"
-              className="h-auto w-full object-contain"
-            />
-          </div>
-
-          {/* Islamic guidance */}
-          <div className="rounded-2xl border border-[#e6d9b1] bg-white p-6 shadow-sm">
-            <h2 className="text-lg font-bold text-[#075c3b]">
-              Why Ask Al-Fataawaa?
-            </h2>
-
-            <p className="mt-2 text-sm leading-7 text-gray-600">
-              Our platform provides a way to submit your Islamic questions and
-              seek guidance on matters of worship, family, business, and
-              everyday life.
-            </p>
-
-            <div className="mt-5 grid grid-cols-3 gap-3 text-center">
-              <div className="rounded-xl bg-[#f0f7f1] p-3">
-                <span className="text-2xl">☪</span>
-                <p className="mt-2 text-xs font-semibold text-[#075c3b]">
-                  Ibaadaa
-                </p>
-              </div>
-
-              <div className="rounded-xl bg-[#f0f7f1] p-3">
-                <span className="text-2xl">⌂</span>
-                <p className="mt-2 text-xs font-semibold text-[#075c3b]">
-                  Maatii
-                </p>
-              </div>
-
-              <div className="rounded-xl bg-[#f0f7f1] p-3">
-                <span className="text-2xl">⚖</span>
-                <p className="mt-2 text-xs font-semibold text-[#075c3b]">
-                  Mu'aamalaa
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Right: Question form */}
         <section className="rounded-3xl border border-[#e8e1cb] bg-white p-6 shadow-lg sm:p-8">
@@ -121,39 +63,46 @@ export default function AskPage() {
               </div>
 
               <h2 className="mt-5 text-2xl font-bold text-[#075c3b]">
-                Gaafiin kee ergameera!
+                Gaafiin kee milkaa'inaan ergameera!
               </h2>
 
               <p className="mt-3 text-sm leading-7 text-gray-600">
-                Gaafiin kee milkaa'inaan ergameera. Galatoomaa. Gaafiin
-                ilaalamee yeroo gabaabaa keessatti deebiin isaa ni maxxanfama.
+                Gaafiin kee milkaa'inaan ergameera. Gaafiin kee ilaalamee yeroo
+                gabaabaa keessatti deebiin isaa ni maxxanfama. Galatoomi
               </p>
+
+              <Link
+                href="/"
+                className="inline-flex items-center justify-center rounded-xl  px-6  py-2  font-semibold text-black border border-[#06452e]  transition hover:bg-[#06452e] hover:text-white"
+              >
+                Bahi
+              </Link>
 
               <button
                 type="button"
                 onClick={() => setStatus("idle")}
-                className={`${ui.secondary} mt-7`}
+                className={`${ui.secondary} mt-7 ml-4 inline-flex items-center justify-center rounded-xl bg-green-500 text-black font-semibold transition hover:bg-[#06452e] border border-[#06452e] hover:text-white`}
               >
-                Gaaffii biraa ergi
+                Gaafii biraa ergi
               </button>
             </div>
           ) : (
             <>
               <div className="mb-7 border-b border-gray-100 pb-5">
-                <h2 className="text-2xl font-bold text-[#064e35]">
-                  Submit Your Question
-                </h2>
-
-                <p className="mt-2 text-sm leading-6 text-gray-500">
-                  Fill in the form below. You do not need to provide your name.
-                </p>
+                <div className="flex items-center gap-x-3">
+                  <img
+                    src="/kuran.png"
+                    alt="Al-Fataawaa Ask Mufti Icon"
+                    className=" w-full h-auto rounded-full "
+                  />
+                </div>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Question */}
                 <div>
                   <label htmlFor="question" className={ui.label}>
-                    Your Islamic Question
+                    Gaafii kee barreessi
                     <span className="ml-1 text-red-500">*</span>
                   </label>
 
@@ -164,9 +113,9 @@ export default function AskPage() {
                     minLength={5}
                     maxLength={2000}
                     rows={7}
-                    placeholder="Write your question clearly here..."
+                    placeholder="Gaafii kee asitti barreessi..."
                     onChange={(e) => setLength(e.target.value.length)}
-                    className={`${ui.input} resize-y`}
+                    className={`${ui.input} resize-y border border-blue-500 bg-gray-500 text-black placeholder-gray-400 focus:border-[#087443] focus:ring-[#087443]`}
                   />
 
                   <p className={`${ui.hint} mt-1 text-end`}>
@@ -189,13 +138,8 @@ export default function AskPage() {
                     type="email"
                     autoComplete="email"
                     placeholder="example@gmail.com"
-                    className={ui.input}
+                    className={`${ui.input} border border-blue-500 bg-gray-500 text-black placeholder-gray-400 focus:border-[#087443] focus:ring-[#087443]`}
                   />
-
-                  <p className={`${ui.hint} mt-2`}>
-                    Your email address will never be displayed publicly on the
-                    website.
-                  </p>
                 </div>
 
                 {/* Email notification */}
@@ -208,7 +152,6 @@ export default function AskPage() {
                   />
 
                   <span className="text-sm leading-6 text-gray-700">
-                    Deebiin isaa karaa Emailii tiin na haa qaqqabu.
                     <span className="block text-xs text-gray-500">
                       Notify me by email when my question is answered.
                     </span>
@@ -241,8 +184,8 @@ export default function AskPage() {
                 </button>
 
                 <p className="text-center text-xs leading-5 text-gray-400">
-                  Your question will be reviewed before it is published on
-                  Al-Fataawaa.
+                  Gaafiin kee sirriitti laalamee, Deebiin isaa yeroo gabaabaa
+                  keessatti ni maxxanfama.
                 </p>
               </form>
             </>

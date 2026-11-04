@@ -21,7 +21,7 @@ async function ProgramList() {
   const countBy = Object.fromEntries(counts.map((c) => [String(c._id), c.n]));
 
   if (programs.length === 0) {
-    return <p className="text-muted">No programs yet.</p>;
+    return <p className="text-muted">sagantaan hin jiru.</p>;
   }
 
   return (
@@ -44,7 +44,9 @@ async function ProgramList() {
 export default function YouTubePage() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-8">
-      <h1 className="mb-6 text-3xl font-semibold tracking-tight">YouTube programs</h1>
+      <h1 className="mb-6 text-3xl font-semibold bg-[#064e35] border-4 border-blue-500 text-white py-4 px-6 rounded-lg shadow-lg">
+        Sagantaalee YouTube
+      </h1>
       <Suspense fallback={<p className="text-muted">Loading...</p>}>
         <ProgramList />
       </Suspense>

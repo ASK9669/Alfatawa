@@ -5,50 +5,23 @@ const categories = [
   {
     icon: "☪",
     title: "Ibaadaa",
-    subtitle: "Prayer, fasting and worship",
+    subtitle: "Salaata,Soomanafi kkf",
     description:
-      "Learn about Salah, Sawm, Zakah, Hajj and other acts of worship.",
+      "Islaamummaa keessatti barnoota ibaadaa irratti hubanoo gahaa argachuuf.",
   },
   {
     icon: "⌂",
     title: "Maatii",
-    subtitle: "Family and relationships",
+    subtitle: "Maatiifi Hariiroo Hawaasummaa",
     description:
-      "Explore Islamic guidance about marriage, family and social relationships.",
+      "Qajeelfama Maatii, fuudhaafi heeruma hawaasa Muslimaa karaa sirrii taheen hubachuuf.",
   },
   {
     icon: "⚖",
     title: "Mu'aamalaa",
-    subtitle: "Business and transactions",
+    subtitle: "Diinadgeefi Hojii Guyyaa Guyyaa",
     description:
-      "Understand Islamic principles concerning trade, finance and daily dealings.",
-  },
-];
-
-const features = [
-  {
-    icon: "📖",
-    title: "Authentic Islamic Knowledge",
-    description:
-      "Learn Islamic teachings through guidance based on the Quran and authentic Sunnah.",
-  },
-  {
-    icon: "🎓",
-    title: "Ask Qualified Scholars",
-    description:
-      "Submit your questions and seek answers from qualified Islamic scholars.",
-  },
-  {
-    icon: "🌍",
-    title: "Afaan Oromoo Access",
-    description:
-      "Access Islamic knowledge and guidance in a language our community understands.",
-  },
-  {
-    icon: "▶",
-    title: "Video Learning",
-    description:
-      "Watch Islamic lessons and educational videos to increase your understanding.",
+      "hubannoo sirrii Sochii diinadgdee,daldalaafi hojii guyyaa guyyaa keessatti karaa duudhaa Amantaa Islaamaa eeggateen hubachuu.",
   },
 ];
 
@@ -71,7 +44,7 @@ export default function HomePage() {
               dir="rtl"
             >
               وَمَا أَرْسَلْنَا مِن قَبْلِكَ إِلَّا رِجَالًا نُّوحِي إِلَيْهِمْ
-              ۚ فَاسْأَلُوا أَهْلَ الذِّكْرِ إِن كُنتُمْ لَا تَعْلَمُونَ{" "}
+              ۚ فَاسْئلُوا أَهْلَ الذِّكْرِ إِن كُنتُمْ لَا تَعْلَمُونَ{" "}
             </h2>
 
             <p className="mx-auto mt-5 max-w-2xl text-base  text-[#064e35] sm:text-lg">
@@ -119,28 +92,27 @@ export default function HomePage() {
               Amantiin Islaama namoonni waan hin beekne hayyoota irraa akka
               gaafatan nu barsiisa. Beekumsa sirrii barbaaduufi dhimma amantii
               keessatti hayyoota gaafatanii hubachuun barbaachisaadha.
-              Weebsaayitiin kun madda beekumsa Islaamaa fi qajeelfama shari'aa
+              Weebsaayitiin kun madda beekumsa Amantaa Islaamaa fi qajeelfama shari'aa
               Afaan Oromootiin isiniif dhiyeessa. Weebsayitii kana irratti
               Gaafilee Shari'aa gaafachuu, Fatwaalee armaan duraa{" "}
               <strong>
                 <i>Doktor Jibriil Qamar</i>
               </strong>
               iin kennaman Ilaaluufi Sagantaalee Muhaadaraa, barnootaafi gorsa
-              Gaggababaao karaa salphaan akka hordofuu Dandeessu.Gaafileee
-              keessaniif yeroo gababaa keessatti Sheeka irraa Deebii ni argattu.
+              Gaggababoo karaa salphaan akka hordoftaniif isin gargaara.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/ask"
-                className="rounded-xl bg-[#e8c66b] px-6 py-3.5 font-bold text-[#064e35] shadow-lg transition hover:bg-[#f3d987]"
+                className="rounded-xl bg-[#e8c66b] px-3 py-3.5 font-bold text-[#064e35] shadow-lg transition hover:bg-[#f3d987] hover:text-black hover:shadow-xl"
               >
                 Muftii Gaafadhu
               </Link>
 
               <Link
                 href="/fatwas"
-                className="rounded-xl border border-white/50 px-6 py-3.5 font-semibold text-white transition hover:bg-white/10"
+                className="rounded-xl border border-white/50 px-3 py-3.5 font-semibold text-white transition hover:bg-white/10 hover:text-[#e8c66b] hover:shadow-lg"
               >
                 Fatawaa Dubbisi
               </Link>
@@ -160,7 +132,8 @@ export default function HomePage() {
             </h2>
 
             <p className="mx-auto mt-3 max-w-2xl text-gray-600">
-              Fatwaalee keenaman Qoodama armaan gadii kaayamu
+              Weebsaayitii kana irratti Fatwaalee Qoodama armaan gadiitiin
+              kaayamu
             </p>
           </div>
 
@@ -199,7 +172,6 @@ export default function HomePage() {
       <section className="px-5 py-16 sm:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="text-center">
-            
             <h2 className="mt-3 text-3xl font-bold text-[#064e35]">
               Al-Fataawaan akkamiin hojjata
             </h2>
@@ -250,37 +222,71 @@ export default function HomePage() {
         </div>
       </section>
 
-
       {/* IMPORTANCE OF ISLAMIC KNOWLEDGE */}
       <section className="px-5 py-16 sm:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="text-center">
-
-
-            <h2 className="mt-3 text-3xl font-bold text-[#064e35]">
-              Barbaachisummaa Beekumsa Islaamaa
+            <h2 className="mt-3 text-2xl font-bold text-[#064e35]">
+              Barbaachisummaa Fatwaa
             </h2>
-
-           
           </div>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {features.map((feature) => (
-              <div
-                key={feature.title}
-                className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition hover:shadow-md"
-              >
-                <span className="text-3xl">{feature.icon}</span>
+            <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition hover:shadow-md">
+              <span className="text-3xl"></span>
 
-                <h3 className="mt-5 font-bold text-[#064e35]">
-                  {feature.title}
-                </h3>
+              <h3 className="mt-5 font-bold text-[#064e35]">
+                Beekumsa Amantii Dabala
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-gray-600">
+                Namni muslimaa tokko waa'ee amantii isaa karaa sirrii taheen
+                akka hubatuuf gargaara.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition hover:shadow-md">
+              <span className="text-3xl"></span>
 
-                <p className="mt-3 text-sm leading-7 text-gray-600">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
+              <h3 className="mt-5 font-bold text-[#064e35]">
+                Gaaffiiwwan deebisa
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-gray-600">
+                Gaaffiiwwan ibaadaa, maatii, daldalaa fi dhimma jireenyaa
+                irratti hawaasa muslimaa irraa ka'aniif deebii kenna.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition hover:shadow-md">
+              <span className="text-3xl"></span>
+
+              <h3 className="mt-5 font-bold text-[#064e35]">
+                Dogoggora irraa baraara
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-gray-600">
+                Namni Muslimaa tokko hojii sirriifi sirrii hin taane addaan
+                baase akka hubatuuf gargaara.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition hover:shadow-md">
+              <span className="text-3xl"></span>
+
+              <h3 className="mt-5 font-bold text-[#064e35]">
+                Rakkoolee hawaasaa fura
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-gray-600">
+                Dhimma jireenya guyyaa guyyaa keessatti Muslimoonni mudatan
+                irratti qajeelfamafi furmaataa ni kenna.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition hover:shadow-md">
+              <span className="text-3xl"></span>
+
+              <h3 className="mt-5 font-bold text-[#064e35]">
+                Qur'aanaafi Hadiisa Hubachiisa
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-gray-600">
+                hawaasni muslimaa qur'aana kabajamaafi Hadiisaa ergamaa rabbi
+                (SAW) karaa sirriin akka hubatu ni taasisa
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -297,11 +303,14 @@ export default function HomePage() {
             dir="rtl"
           >
             فَلَوْلَا نَفَرَ مِن كُلِّ فِرْقَةٍ مِّنْهُمْ طَائِفَةٌ
-            لِّيَتَفَقَّهُوا فِي الدِّينِ ولينذَرُوا قَوْمَهُمْ إِذَا رَجَعُوا إِلَيْهِمْ لَعَلَّهُمْ يَحْذَرُونَ
+            لِّيَتَفَقَّهُوا فِي الدِّينِ ولينذَرُوا قَوْمَهُمْ إِذَا رَجَعُوا
+            إِلَيْهِمْ لَعَلَّهُمْ يَحْذَرُونَ
           </h2>
 
           <p className="mx-auto mt-6 max-w-3xl leading-8 text-green-50">
-            “Garee tokko irraa murni muraasni deemanii beekumsa Amantii Islaamaa haa baratanii,akka booda gara tuuta isaanii deebi'anii isaandinniinaniif”
+            “Garee tokko irraa murni muraasni deemanii beekumsa Amantii Islaamaa
+            haa baratanii,akka booda gara tuuta isaanii deebi'anii
+            isaandinniinaniif”
           </p>
 
           <p className="mt-5 font-semibold text-[#e8c66b]">
@@ -309,13 +318,13 @@ export default function HomePage() {
           </p>
 
           <div className="mx-auto mt-8 max-w-3xl border-t border-white/20 pt-8">
-
             <h3 className="mt-5 text-2xl leading-loose" dir="rtl">
               مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ
             </h3>
 
             <p className="mt-4 leading-8 text-green-50">
-              “Rabbiin nama hojii keeyrii isaaf jaalate beekumsa amantii islaamaa isa barsiisa”
+              “Rabbiin nama hojii keeyrii isaaf jaalate beekumsa amantii
+              islaamaa isa barsiisa”
             </p>
 
             <p className="mt-4 text-sm font-semibold text-[#e8c66b]">
@@ -324,10 +333,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      
-
-
 
       {/* CALL TO ACTION
       <section className="px-5 pb-16 sm:px-8">
@@ -358,7 +363,6 @@ export default function HomePage() {
           </div>
         </div>
       </section> */}
-
     </main>
   );
 }

@@ -21,8 +21,8 @@ export default function SiteFooter() {
             <div className='hover:text-blue-500'><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
                 Facebook
               </a></div>
-              <div className='hover:text-blue-500'><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                Facebook 
+              <div className='hover:text-blue-500'><a href="https://t.me/drjibrilkemerofficial" target="_blank" rel="noopener noreferrer">
+                Telegram
               </a></div>
           </ul>
         </div>
