@@ -49,7 +49,7 @@ export default function LoginPage() {
           </div>
           {error && <p role="alert" className={ui.error}>{error}</p>}
           <button type="submit" disabled={sending} className={`${ui.primary} w-full`}>
-            {sending ? 'Signing in...' : 'Sign in'}
+            {sending ? 'Seenaa jira...' : 'Seeni'}
           </button>
         </form>
       </div>

@@ -1,135 +1,302 @@
-import { Suspense } from 'react';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { getAdminFromCookie } from '@/lib/auth';
-import { connectDB } from '@/lib/db';
-import Fatwa from '@/models/Fatwa';
-import LogoutButton from './LogoutButton';
+import { Suspense } from "react";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { getAdminFromCookie } from "@/lib/auth";
+import { connectDB } from "@/lib/db";
+import Fatwa from "@/models/Fatwa";
+import LogoutButton from "./LogoutButton";
 
 const BADGE = {
-  Pending: 'border-accent text-accent',
-  Draft: 'text-muted',
-  Published: 'border-primary text-primary',
+  Pending: "bg-amber-50 text-amber-700 ring-amber-200",
+  Draft: "bg-gray-100 text-gray-600 ring-gray-200",
+  Published: "bg-emerald-50 text-emerald-700 ring-emerald-200",
 };
 
 function formatDate(date) {
-  return new Date(date).toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    timeZone: 'UTC',
+  return new Date(date).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
   });
 }
+
+function Stat({ label, value, icon, color }) {
+  return (
+    <div className="rounded-2xl border border-border bg-surface p-5 transition hover:-translate-y-1 hover:shadow-md">
+      <div className="flex items-center justify-between">
+        <p className="text-sm font-medium text-muted">{label}</p>
+        <span
+          className={`flex h-10 w-10 items-center justify-center rounded-xl text-xl ${color}`}
+        >
+          {icon}
+        </span>
+      </div>
+      <p className="mt-4 text-3xl font-bold tracking-tight text-primary">
+        {value}
+      </p>
+      <p className="mt-1 text-xs text-muted">Total records</p>
+    </div>
+  );
+}
+
+const actions = [
+  {
+    title: "Fatwaa Haaraa Maxxansi",
+    description: "Fatwaa haaraa maxxansi ykn qopheessi.",
+    href: "/admin/fatwas/new",
+    icon: "✍️",
+  },
+  {
+    title: "Fatwaa Olbaasi",
+    description: "Fatwaa dura qophaahe olbaasi",
+    href: "/admin/import",
+    icon: "📥",
+  },
+  {
+    title: "YouTube",
+    description: "Sagantaalee YouTube qopheessi ykn maxxansi.",
+    href: "/admin/youtube",
+    icon: "▶️",
+  },
+  {
+    title: "Edit Godhi",
+    description: "About page fi settings edit godhi.",
+    href: "/admin/about",
+    icon: "⚙️",
+  },
+];
 
 function FatwaRow({ f }) {
   return (
     <li>
       <Link
         href={`/admin/fatwas/${String(f._id)}`}
-        className="block px-1 py-4 hover:bg-surface"
+        className="group flex flex-col gap-3 rounded-xl px-4 py-4 transition hover:bg-surface sm:flex-row sm:items-center sm:justify-between"
       >
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-          <span className={`rounded-md border px-2 py-0.5 text-xs font-medium ${BADGE[f.status] || ''}`}>
-            {f.status}
-          </span>
-          {f.number && <span className="font-semibold text-primary">No. {f.number}</span>}
-          <span className="text-muted">{formatDate(f.createdAt)}</span>
+        <div className="min-w-0 flex-1">
+          <div className="mb-2 flex flex-wrap items-center gap-2">
+            <span
+              className={`rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ring-inset ${
+                BADGE[f.status] || BADGE.Draft
+              }`}
+            >
+              {f.status}
+            </span>
+
+            {f.number && (
+              <span className="text-xs font-semibold text-primary">
+                No. {f.number}
+              </span>
+            )}
+          </div>
+
+          <p className="line-clamp-2 text-sm font-medium leading-relaxed group-hover:text-primary">
+            {f.questionOromo}
+          </p>
         </div>
-        <p className="mt-1.5 line-clamp-2">{f.questionOromo}</p>
+
+        <div className="flex shrink-0 items-center justify-between gap-3 text-xs text-muted sm:flex-col sm:items-end">
+          <span>{formatDate(f.createdAt)}</span>
+          <span className="text-primary transition group-hover:translate-x-1">
+            View →
+          </span>
+        </div>
       </Link>
     </li>
   );
 }
 
-function Stat({ label, value }) {
-  return (
-    <div className="rounded-lg border bg-surface p-4">
-      <p className="text-3xl font-semibold tabular-nums text-primary">{value}</p>
-      <p className="text-sm text-muted">{label}</p>
-    </div>
-  );
-}
-
 async function Dashboard() {
   const admin = await getAdminFromCookie();
-  if (!admin) redirect('/admin/login');
+  if (!admin) redirect("/admin/login");
 
   await connectDB();
+
   const [pending, drafts, publishedCount] = await Promise.all([
-    Fatwa.countDocuments({ status: 'Pending' }),
-    Fatwa.countDocuments({ status: 'Draft' }),
-    Fatwa.countDocuments({ status: 'Published' }),
+    Fatwa.countDocuments({ status: "Pending" }),
+    Fatwa.countDocuments({ status: "Draft" }),
+    Fatwa.countDocuments({ status: "Published" }),
   ]);
 
-  const inbox = await Fatwa.find({ status: { $in: ['Pending', 'Draft'] } })
-    .sort({ createdAt: -1 })
-    .select('questionOromo status number createdAt')
-    .lean();
-  const published = await Fatwa.find({ status: 'Published' })
-    .sort({ number: -1 })
-    .limit(20)
-    .select('questionOromo status number createdAt')
-    .lean();
+  const [inbox, published] = await Promise.all([
+    Fatwa.find({ status: { $in: ["Pending", "Draft"] } })
+      .sort({ createdAt: -1 })
+      .select("questionOromo status number createdAt")
+      .lean(),
+
+    Fatwa.find({ status: "Published" })
+      .sort({ number: -1 })
+      .limit(20)
+      .select("questionOromo status number createdAt")
+      .lean(),
+  ]);
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-8">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-3xl font-semibold tracking-tight">Dashboard</h1>
-        <LogoutButton />
+    <main className="min-h-screen bg-background">
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+        {/* Header */}
+        <header className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-6">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-xl font-bold text-white">
+              A
+            </div>
+            <div>
+              <h1 className="text-xl font-bold tracking-tight">Al-Fataawaa</h1>
+              <p className="text-xs text-muted">Dr Jibriil Qamar</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="hidden rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700 sm:inline-block">
+              ● Admin
+            </span>
+            <LogoutButton />
+          </div>
+        </header>
+
+        {/* Welcome */}
+        <section className="mt-8">
+          <h2 className="text-sm font-medium text-primary">ADMIN</h2>
+
+          <p className="mt-2 text-sm text-muted">
+            Weebsaayitii kee to'achuuf, qajeelfama fi gaaffilee haaraaf
+            fatwaalee maxxanfaman ilaaluuf.
+          </p>
+        </section>
+
+        {/* Statistics */}
+        <section className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Stat
+            label="Deebii Eegataa kan jiran"
+            value={pending}
+            icon="⏳"
+            color="bg-amber-50"
+          />
+          <Stat
+            label="Kan yeroof olkaa'ame"
+            value={drafts}
+            icon="📝"
+            color="bg-gray-100"
+          />
+          <Stat
+            label="Published Fatwas"
+            value={publishedCount}
+            icon="📚"
+            color="bg-emerald-50"
+          />
+        </section>
+
+        {/* Quick Actions */}
+        <section className="mt-10">
+          <div className="mb-4">
+            <h2 className="text-lg font-bold">Weebsaayitii kee irratti </h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {actions.map((action) => (
+              <Link
+                key={action.href}
+                href={action.href}
+                className="group rounded-2xl border border-border bg-surface p-5 transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
+              >
+                <span className="text-2xl">{action.icon}</span>
+                <h3 className="mt-4 text-sm font-bold group-hover:text-primary">
+                  {action.title}
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-muted">
+                  {action.description}
+                </p>
+                <p className="mt-4 text-xs font-semibold text-primary">Seeni</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Inbox */}
+        <section className="mt-12">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-bold">Ergaa Haaraa</h2>
+              <p className="mt-1 text-sm text-muted">
+                Gaafilee haaraa ergamanii deebii eeggataa jiran
+              </p>
+            </div>
+            <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
+              {inbox.length} dha.
+            </span>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-border bg-surface">
+            {inbox.length === 0 ? (
+              <div className="px-4 py-12 text-center">
+                <span className="text-3xl">📭</span>
+                <p className="mt-3 font-bold text-lg">0 dha.</p>
+                <p className="mt-1 text-sm text-black">
+                  Gaafiin haaraan ergame hin jiru.
+                </p>
+              </div>
+            ) : (
+              <ul className="divide-y divide-border">
+                {inbox.map((f) => (
+                  <FatwaRow key={String(f._id)} f={f} />
+                ))}
+              </ul>
+            )}
+          </div>
+        </section>
+
+        {/* Published Fatwas */}
+        <section className="mt-12">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-bold">
+                Fatwaalee haaraa Maxxanfaman
+              </h2>
+              <p className="mt-1 text-sm text-muted"></p>
+            </div>
+            <span className="text-sm font-medium text-primary">
+              {publishedCount} maxxanfaman.
+            </span>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-border bg-surface">
+            {published.length === 0 ? (
+              <div className="px-4 py-12 text-center">
+                <span className="text-3xl">📚</span>
+                <p className="mt-3 font-medium">No published Fatwas yet</p>
+                <p className="mt-1 text-sm text-muted">
+                  Fatwaaleen maxxanfaman hin jiran.
+                </p>
+              </div>
+            ) : (
+              <ul className="divide-y divide-border">
+                {published.map((f) => (
+                  <FatwaRow key={String(f._id)} f={f} />
+                ))}
+              </ul>
+            )}
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="mt-12 border-t border-border py-6 text-center text-xs text-muted">
+          Al-Fataawaa Administration · Manage knowledge, serve the community.
+        </footer>
       </div>
-
-      <nav aria-label="Admin links" className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm">
-        <Link href="/admin/about" className="font-medium text-primary hover:underline">
-          Edit godhi 
-        </Link>
-        <Link href="/" className="font-medium text-primary hover:underline">
-          Website Ilaali
-        </Link>
-                <Link href="/admin/fatwas/new" className="font-medium text-primary hover:underline">
-          Fatwaa Haaraa Maxxansi
-        </Link>
-        <Link href="/admin/import" className="font-medium text-primary hover:underline">
-          Fatwaa Haaraa olbaasi
-        </Link>
-                <Link href="/admin/youtube" className="font-medium text-primary hover:underline">
-          YouTube 
-        </Link>
-      </nav>
-
-      <div className="mt-6 grid grid-cols-3 gap-3">
-        <Stat label="Waiting" value={pending} />
-        <Stat label="Drafts" value={drafts} />
-        <Stat label="Published" value={publishedCount} />
-      </div>
-
-      <section className="mt-10">
-        <h2 className="text-lg font-semibold">Inbox ({inbox.length})</h2>
-        {inbox.length === 0 ? (
-          <p className="mt-3 text-muted">Gaafiin haaraa ergame hin jiru </p>
-        ) : (
-          <ul className="mt-3 divide-y border-y">
-            {inbox.map((f) => <FatwaRow key={String(f._id)} f={f} />)}
-          </ul>
-        )}
-      </section>
-
-      <section className="mt-10">
-        <h2 className="text-lg font-semibold">kan Dhiyoo maxxanfaman </h2>
-        {published.length === 0 ? (
-          <p className="mt-3 text-muted">homaa hin jiru</p>
-        ) : (
-          <ul className="mt-3 divide-y border-y">
-            {published.map((f) => <FatwaRow key={String(f._id)} f={f} />)}
-          </ul>
-        )}
-      </section>
     </main>
   );
 }
 
 export default function AdminPage() {
   return (
-    <Suspense fallback={<p className="p-4 text-muted">Loading...</p>}>
+    <Suspense
+      fallback={
+        <p className="p-8 text-center text-sm text-muted">
+          Loading dashboard...
+        </p>
+      }
+    >
       <Dashboard />
     </Suspense>
   );
