@@ -165,7 +165,7 @@ async function FatwaBrowser({ searchParams }) {
             defaultValue={q}
             maxLength={100}
             aria-label="Search fatwas"
-            placeholder="What would you like to know?"
+            placeholder="lakkoofsa, jecha ykn gaafii seeraan qubeessi"
             className="min-w-0 flex-1 rounded-xl border border-gray-200 bg-[#fafaf7] px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-[#087443] focus:ring-2 focus:ring-[#087443]/10"
           />
 
@@ -200,7 +200,7 @@ async function FatwaBrowser({ searchParams }) {
               href="/fatwas"
               className="text-sm font-semibold text-[#087443] hover:underline"
             >
-              hundaa laai
+              hundaa laali
             </Link>
           )}
         </div>
@@ -249,11 +249,11 @@ async function FatwaBrowser({ searchParams }) {
               <Link
                 key={String(f._id)}
                 href={`/fatwas/${f.slug}`}
-                className="group block rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-[#c6a84f] hover:shadow-lg sm:p-6"
+                className="group block rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-green-600 border border-green-200  border-l-6 hover:shadow-lg sm:p-6"
               >
                 <div className="flex items-start gap-4">
                   {/* Fatwa number */}
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#eaf3e9] text-[#075c3b] transition group-hover:bg-[#075c3b] group-hover:text-white">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-[#075c3b] transition  group-hover:text-white">
                     <FatwaNumber number={f.number} />
                   </div>
 

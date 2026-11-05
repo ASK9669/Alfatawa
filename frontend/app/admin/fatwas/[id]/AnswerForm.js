@@ -1,114 +1,254 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { ui } from '@/lib/ui';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { ui } from "@/lib/ui";
+import BackButton from "../../BackButton";
 
 export default function AnswerForm({ fatwa, categories }) {
   const router = useRouter();
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+
+  const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [saved, setSaved] = useState(fatwa);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [message, setMessage] = useState("");
 
   async function save(e, status) {
     const form = e.currentTarget.form;
+
     setBusy(true);
-    setError('');
-    setMessage('');
+    setError("");
+    setMessage("");
 
-    const res = await fetch(`/api/admin/fatwas/${fatwa.id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        status,
-        questionOromo: form.questionOromo.value,
-        category: form.category.value,
-        answerOromo: form.answerOromo.value,
-        youtubeUrl: form.youtubeUrl.value,
-      }),
-    });
-    const data = await res.json();
-    setBusy(false);
+    try {
+      const res = await fetch(`/api/admin/fatwas/${fatwa.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          status,
+          questionOromo: form.questionOromo.value,
+          category: form.category.value,
+          answerOromo: form.answerOromo.value,
+          youtubeUrl: form.youtubeUrl.value,
+        }),
+      });
 
-    if (!res.ok) {
-      setError(data.error || 'Could not save.');
-      return;
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Could not save.");
+        return;
+      }
+
+      setSaved({
+        ...saved,
+        status: data.status,
+        number: data.number,
+        slug: data.slug,
+      });
+
+      let text =
+        data.status === "Published"
+          ? `Fatwaan lakkoofsa ${data.number} irratti milkaa'inaan maxxanfameera!`
+          : data.status === "Draft"
+            ? "Deebiin kee milkaa'inaan kuufameera!"
+            : "Gaaffiin kun milkaa'inaan haqameera!";
+
+      if (data.emailStatus === "sent") {
+        text += " Gaaffii gaafateef email ergameera.";
+      }
+
+      if (data.emailStatus === "failed") {
+        text += " Email erguun hin milkoofne. Maxxansuu irra deebi'i.";
+      }
+
+      setMessage(text);
+      setShowSuccess(true);
+
+      router.refresh();
+    } catch (err) {
+      setError("Rakkoon tokko uumameera. Irra deebi'ii yaali.");
+    } finally {
+      setBusy(false);
     }
-    setSaved({ ...saved, status: data.status, number: data.number, slug: data.slug });
-
-    let text =
-      data.status === 'Published'
-        ? `Published as Fatwa No. ${data.number}.`
-        : `Saved as ${data.status}.`;
-    if (data.emailStatus === 'sent') text += ' The asker was notified by email.';
-    if (data.emailStatus === 'failed') {
-      text += ' The email to the asker could not be sent. Click Publish again to retry.';
-    }
-    setMessage(text);
-    router.refresh();
   }
 
   return (
-    <form className="mt-6 space-y-6">
-      <p className="text-sm text-muted">
-        Status: <span className="font-semibold text-ink">{saved.status}</span>
-      </p>
+    <>
+      <form className="mt-6 space-y-7">
+        {/* Back Button and Status */}
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <span className="rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
+            {saved.status}
+          </span>
+        </div>
 
-      <div>
-        <label htmlFor="questionOromo" className={ui.label}>Question</label>
-        <textarea id="questionOromo" name="questionOromo" rows={4}
-          defaultValue={fatwa.questionOromo} className={ui.input} />
-      </div>
+        {/* Question */}
+        <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm sm:p-6">
+          <div className="mb-4">
+            <h2 className="text-lg font-bold">Gaaffii</h2>
+            <p className="mt-1 text-sm text-muted">
+              Gaaffii namni gaafate sirreessi yoo barbaachise.
+            </p>
+          </div>
+          <textarea
+            id="questionOromo"
+            name="questionOromo"
+            rows={4}
+            defaultValue={fatwa.questionOromo}
+            className={`${ui.input} resize-y leading-7`}
+          />
+        </div>
 
-      <div>
-        <label htmlFor="category" className={ui.label}>Category</label>
-        <select id="category" name="category" defaultValue={fatwa.category} className={ui.input}>
-          <option value="">Choose a category</option>
-          {categories.map((c) => (
-            <option key={c.id} value={c.id}>{c.nameOromo}</option>
-          ))}
-        </select>
-        <p className={ui.hint}>tokko filachuun dirqama.</p>
-      </div>
+        {/* Category */}
+        <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm sm:p-6">
+          <h2 className="mb-4 text-lg font-bold">Ramaddii</h2>
 
-      <div>
-        <label htmlFor="answerOromo" className={ui.label}>Deebii</label>
-        <textarea id="answerOromo" name="answerOromo" rows={12}
-          defaultValue={fatwa.answerOromo} className={`${ui.input} leading-7`} />
-      </div>
+          <select
+            id="category"
+            name="category"
+            defaultValue={fatwa.category}
+            className={ui.input}
+          >
+            <option value="">Ramaddii filadhu</option>
+            {categories.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.nameOromo}
+              </option>
+            ))}
+          </select>
 
-      <div>
-        <label htmlFor="youtubeUrl" className={ui.label}>YouTube link (optional)</label>
-        <input id="youtubeUrl" name="youtubeUrl" defaultValue={fatwa.youtubeUrl} className={ui.input} />
-      </div>
+          <p className={ui.hint}>Tokko filachuun dirqama.</p>
+        </div>
 
-      <div aria-live="polite" className="space-y-3">
-        {error && <p role="alert" className={ui.error}>{error}</p>}
-        {message && <p role="status" className={ui.success}>{message}</p>}
-        {saved.status === 'Published' && saved.slug && (
-          <a href={`/fatwas/${saved.slug}`} target="_blank" rel="noreferrer"
-            className="inline-block text-sm font-medium text-primary underline">
-          Weebsaayitii irratti Ilaali
-          </a>
+        {/* Answer */}
+        <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm sm:p-6">
+          <div className="mb-4">
+            <h2 className="text-lg font-bold">Deebii Fatwaa</h2>
+            <p className="mt-1 text-sm text-muted">
+              Deebii guutuu asitti barreessi.
+            </p>
+          </div>
+          <textarea
+            id="answerOromo"
+            name="answerOromo"
+            rows={14}
+            defaultValue={fatwa.answerOromo}
+            className={`${ui.input} resize-y leading-8`}
+          />
+        </div>
+
+        {/* YouTube */}
+        <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm sm:p-6">
+          <h2 className="mb-4 text-lg font-bold">YouTube Video</h2>
+
+          <label htmlFor="youtubeUrl" className={ui.label}>
+            YouTube link (optional)
+          </label>
+
+          <input
+            id="youtubeUrl"
+            name="youtubeUrl"
+            type="url"
+            defaultValue={fatwa.youtubeUrl}
+            placeholder="https://www.youtube.com/watch?v=..."
+            className={ui.input}
+          />
+        </div>
+
+        {/* Error Message */}
+        {error && (
+          <div
+            role="alert"
+            className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700"
+          >
+            ⚠️ {error}
+          </div>
         )}
-      </div>
 
-      <div className="flex flex-wrap gap-3 border-t pt-6">
-        <button type="button" disabled={busy} onClick={(e) => save(e, 'Published')} className={ui.primary}>
-          Maxxansi
-        </button>
-        <button type="button" disabled={busy} onClick={(e) => save(e, 'Draft')} className={ui.secondary}>
-          yeroof kaayi
-        </button>
-        <button type="button" disabled={busy}
-          onClick={(e) => {
-            if (confirm('Reject this question? It will not be published.')) save(e, 'Rejected');
-          }}
-          className={`${ui.danger} sm:ms-auto`}>
-          Haqi
-        </button>
-      </div>
-    </form>
+        {/* Action Buttons */}
+        <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm sm:p-6">
+         <div className="flex flex-row flex-wrap items-center justify-center gap-2 sm:gap-3">
+            {/* Publish */}
+            <button
+              type="button"
+              disabled={busy}
+              onClick={(e) => save(e, "Published")}
+              className="rounded-lg border border-l-4 border-t-4 border-green-700 px-3 py-2 text-sm font-medium text-green-800 transition hover:bg-green-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+            >
+              {busy ? "Eegaa..." : "Maxxansi"}
+            </button>
+
+            {/* Save Draft */}
+            <button
+              type="button"
+              disabled={busy}
+              onClick={(e) => save(e, "Draft")}
+              className="rounded-lg border border-l-4 border-t-4 border-amber-500 px-3 py-2 text-sm font-medium text-amber-700 transition hover:bg-amber-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-amber-400"
+            >
+              {busy ? "Eegaa..." : "Yeroof Kaayi"}
+            </button>
+
+            {/* Reject */}
+            <button
+              type="button"
+              disabled={busy}
+              onClick={(e) => {
+                if (
+                  confirm("Reject this question? It will not be published.")
+                ) {
+                  save(e, "Rejected");
+                }
+              }}
+              className="rounded-lg border border-l-4 border-t-4 border-red-600 px-3 py-2 text-sm font-medium text-red-700 transition hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+            >
+              {busy ? "Eegaa..." : "Haqi"}
+            </button>
+          </div>
+        </div>
+      </form>
+
+      {/* Success Popup */}
+      {showSuccess && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 backdrop-blur-sm"
+          onClick={() => setShowSuccess(false)}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="success-title"
+            className="w-full max-w-sm animate-in zoom-in-95 rounded-2xl bg-background p-7 text-center shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-3xl text-emerald-600">
+              ✓
+            </div>
+
+            <h2 id="success-title" className="mt-5 text-xl font-bold">
+              Milkaa'eera!
+            </h2>
+
+            <p className="mt-3 text-sm leading-7 text-muted">{message}</p>
+
+            <div className="mt-6 flex flex-col gap-3">
+              {saved.status === "Published" && saved.slug && (
+                <a
+                  href={`/fatwas/${saved.slug}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-xl border border-primary px-4 py-3 text-sm font-semibold text-primary transition hover:bg-primary/5"
+                >
+                  Weebsaayitii irratti Ilaali ↗
+                </a>
+              )}
+
+              <BackButton />
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

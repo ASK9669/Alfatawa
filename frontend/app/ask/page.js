@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ui } from "@/lib/ui";
 import Link from "next/link";
+import BackButton from "../admin/BackButton";
 
 export default function AskPage() {
   const [status, setStatus] = useState("idle");
@@ -73,15 +74,16 @@ export default function AskPage() {
 
               <Link
                 href="/"
-                className="inline-flex items-center justify-center rounded-xl  px-6  py-2  font-semibold text-black border border-[#06452e]  transition hover:bg-[#06452e] hover:text-white"
+                className="m-4  rounded-lg border-r-4 border-t-4 border border-green-800 px-4 py-2 text-sm font-medium text-black transition hover:bg-green-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
               >
                 Bahi
               </Link>
+             
 
               <button
                 type="button"
                 onClick={() => setStatus("idle")}
-                className={`${ui.secondary} mt-7 ml-4 inline-flex items-center justify-center rounded-xl bg-green-500 text-black font-semibold transition hover:bg-[#06452e] border border-[#06452e] hover:text-white`}
+                className={`${ui.secondary} m-4  rounded-lg border-r-4 border-t-4 border border-green-800 px-4 py-2 text-sm font-medium text-black transition hover:bg-green-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-green-500`}
               >
                 Gaafii biraa ergi
               </button>
@@ -115,18 +117,18 @@ export default function AskPage() {
                     rows={7}
                     placeholder="Gaafii kee asitti barreessi..."
                     onChange={(e) => setLength(e.target.value.length)}
-                    className={`${ui.input} resize-y border border-blue-500 bg-gray-500 text-black placeholder-gray-400 focus:border-[#087443] focus:ring-[#087443]`}
+                    className={`${ui.input} resize-y border border-yellow-600 bg-gray-600 text-black placeholder-gray-400 focus:border-[#087443] focus:ring-[#087443]`}
                   />
 
                   <p className={`${ui.hint} mt-1 text-end`}>
-                    {length} / 2000 characters
+                    {length} / 2000 jechoota
                   </p>
                 </div>
 
                 {/* Email */}
                 <div>
                   <label htmlFor="email" className={ui.label}>
-                    Email Address
+                    Email 
                     <span className="ml-2 text-xs font-normal text-gray-400">
                       (Optional)
                     </span>
@@ -138,7 +140,7 @@ export default function AskPage() {
                     type="email"
                     autoComplete="email"
                     placeholder="example@gmail.com"
-                    className={`${ui.input} border border-blue-500 bg-gray-500 text-black placeholder-gray-400 focus:border-[#087443] focus:ring-[#087443]`}
+                    className={`${ui.input} border border-yellow-600 bg-gray-500 text-black placeholder-gray-400 focus:border-[#087443] focus:ring-[#087443]`}
                   />
                 </div>
 
@@ -173,16 +175,20 @@ export default function AskPage() {
                     {message}
                   </p>
                 )}
+                <p className="text-center text-sm text-muted">
+                  <BackButton />
+                
 
                 {/* Submit */}
                 <button
                   type="submit"
                   disabled={status === "sending"}
-                  className={`${ui.primary} w-full justify-center py-3.5`}
+                  className="m-4  rounded-lg border-r-4 border-t-4 border border-green-800 px-4 py-2 text-sm font-medium text-black transition hover:bg-green-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+    
                 >
-                  {status === "sending" ? "Ergamaa jira..." : "Gaaffii Ergi →"}
+                  {status === "sending" ? "Ergamaa jira..." : "Gaafii Ergi"}
                 </button>
-
+                </p>
                 <p className="text-center text-xs leading-5 text-gray-400">
                   Gaafiin kee sirriitti laalamee, Deebiin isaa yeroo gabaabaa
                   keessatti ni maxxanfama.
@@ -195,10 +201,8 @@ export default function AskPage() {
 
       {/* Footer */}
       <footer className="mx-auto mt-12 max-w-5xl border-t border-[#e5dfca] pt-6 text-center">
-        <p className="text-sm font-semibold text-[#075c3b]">Al-Fataawaa</p>
-
-        <p className="mt-1 text-xs text-gray-500">
-          Seeking knowledge • Sharing guidance • Following Islam
+        <p className="text-sm font-semibold text-[#075c3b]">
+          Al-Fataawaa ||Dr jibriil Qamar
         </p>
       </footer>
     </main>

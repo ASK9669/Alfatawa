@@ -5,6 +5,7 @@ import { getAdminFromCookie } from "@/lib/auth";
 import { connectDB } from "@/lib/db";
 import Fatwa from "@/models/Fatwa";
 import LogoutButton from "./LogoutButton";
+import BackButton from "./BackButton";
 
 const BADGE = {
   Pending: "bg-amber-50 text-amber-700 ring-amber-200",
@@ -35,7 +36,7 @@ function Stat({ label, value, icon, color }) {
       <p className="mt-4 text-3xl font-bold tracking-tight text-primary">
         {value}
       </p>
-      <p className="mt-1 text-xs text-muted">Total records</p>
+      <p className="mt-1 text-xs text-muted">Fatwaa</p>
     </div>
   );
 }
@@ -99,7 +100,7 @@ function FatwaRow({ f }) {
         <div className="flex shrink-0 items-center justify-between gap-3 text-xs text-muted sm:flex-col sm:items-end">
           <span>{formatDate(f.createdAt)}</span>
           <span className="text-primary transition group-hover:translate-x-1">
-            View →
+            Laali
           </span>
         </div>
       </Link>
@@ -139,7 +140,7 @@ async function Dashboard() {
         <header className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-6">
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-xl font-bold text-white">
-              A
+              Al
             </div>
             <div>
               <h1 className="text-xl font-bold tracking-tight">Al-Fataawaa</h1>
@@ -281,7 +282,7 @@ async function Dashboard() {
 
         {/* Footer */}
         <footer className="mt-12 border-t border-border py-6 text-center text-xs text-muted">
-          Al-Fataawaa Administration · Manage knowledge, serve the community.
+          Al-Fataawaa Afaan oromoo | Dr Jibriil Qamar | 2026
         </footer>
       </div>
     </main>
@@ -293,7 +294,7 @@ export default function AdminPage() {
     <Suspense
       fallback={
         <p className="p-8 text-center text-sm text-muted">
-          Loading dashboard...
+          Loading...
         </p>
       }
     >
