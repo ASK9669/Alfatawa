@@ -101,12 +101,12 @@ export async function PUT(request, { params }) {
         const siteUrl = process.env.SITE_URL || 'http://localhost:3000';
         const result = await sendEmail({
           to: fatwa.askerEmail,
-          subject: `Your question was answered (Fatwa No. ${fatwa.number})`,
+          subject: `Deebii Gaafii keetii (Fatwa No. ${fatwa.number})`,
           text:
-            `Your question has been answered.\n\n` +
-            `Read the answer here:\n${siteUrl}/fatwas/${fatwa.slug}\n\n` +
-            `You received this message because you asked a question on our website ` +
-            `and chose to be notified. We use your email address only for this message.\n`,
+            `Gaafii Fatwaa ati gaafatteef Deebiin isaa lakk ${fatwa.slug} irratti siif deebi'ee jira.\n\n` +
+            `Deebii isaa argachuuf liinkii armaan gadii tuqi:\n${siteUrl}/fatwas/${fatwa.slug}\n\n` +
+            `Ergaan kun kan siif ergameef Deebii gaafii keetii siif himuufi` +
+            `Galatoomi. Alfataawaa Afaan Oromoo ||Dr Jibriil Qamar||\n`,
         });
         if (result.ok) {
           fatwa.notifiedAt = new Date();

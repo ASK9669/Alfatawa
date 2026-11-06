@@ -66,6 +66,12 @@ const actions = [
     href: "/admin/about",
     icon: "⚙️",
   },
+  {
+    title: "Fatwaa Hunda",
+    description: "Fatwaa hunda barbaadi, fooyyessi ykn haqi.",
+    href: "/admin/fatwas",
+    icon: "🗂️",
+  },
 ];
 
 function FatwaRow({ f }) {
@@ -123,6 +129,7 @@ async function Dashboard() {
   const [inbox, published] = await Promise.all([
     Fatwa.find({ status: { $in: ["Pending", "Draft"] } })
       .sort({ createdAt: -1 })
+      .limit(30)
       .select("questionOromo status number createdAt")
       .lean(),
 
@@ -194,7 +201,7 @@ async function Dashboard() {
             <h2 className="text-lg font-bold">Weebsaayitii kee irratti </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {actions.map((action) => (
               <Link
                 key={action.href}
@@ -224,7 +231,7 @@ async function Dashboard() {
               </p>
             </div>
             <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
-              {inbox.length} dha.
+              {pending + drafts} dha.
             </span>
           </div>
 
@@ -256,9 +263,12 @@ async function Dashboard() {
               </h2>
               <p className="mt-1 text-sm text-muted"></p>
             </div>
-            <span className="text-sm font-medium text-primary">
-              {publishedCount} maxxanfaman.
-            </span>
+            <Link
+              href="/admin/fatwas?status=Published"
+              className="text-sm font-medium text-primary hover:underline"
+            >
+              {publishedCount} maxxanfaman. Hunda ilaali
+            </Link>
           </div>
 
           <div className="overflow-hidden rounded-2xl border border-border bg-surface">

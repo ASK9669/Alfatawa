@@ -1,7 +1,7 @@
-import { NextResponse, after } from 'next/server';
-import { connectDB } from '@/lib/db';
-import Fatwa from '@/models/Fatwa';
-import { sendEmail } from '@/lib/email';
+import { NextResponse, after } from "next/server";
+import { connectDB } from "@/lib/db";
+import Fatwa from "@/models/Fatwa";
+import { sendEmail } from "@/lib/email";
 
 // simple rate limit: max 5 questions per IP in 10 minutes
 const hits = new Map();
@@ -15,11 +15,11 @@ function tooMany(ip) {
 
 export async function POST(request) {
   try {
-    const ip = request.headers.get('x-forwarded-for') || 'unknown';
+    const ip = request.headers.get("x-forwarded-for") || "unknown";
     if (tooMany(ip)) {
       return NextResponse.json(
-        { error: 'Too many questions. Please try again later.' },
-        { status: 429 }
+        { error: "Too many questions. Please try again later." },
+        { status: 429 },
       );
     }
 
@@ -28,17 +28,20 @@ export async function POST(request) {
     // honeypot: real people never fill this hidden field, bots do
     if (body.website) return NextResponse.json({ ok: true });
 
-    const question = String(body.question || '').trim();
-    const email = String(body.email || '').trim();
+    const question = String(body.question || "").trim();
+    const email = String(body.email || "").trim();
 
     if (question.length < 5 || question.length > 2000) {
       return NextResponse.json(
-        { error: 'Question must be between 5 and 2000 characters.' },
-        { status: 400 }
+        { error: "Question must be between 5 and 2000 characters." },
+        { status: 400 },
       );
     }
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return NextResponse.json({ error: 'Email address is not valid.' }, { status: 400 });
+      return NextResponse.json(
+        { error: "Email address is not valid." },
+        { status: 400 },
+      );
     }
 
     await connectDB();
@@ -46,7 +49,7 @@ export async function POST(request) {
       questionOromo: question,
       askerEmail: email || undefined,
       notifyAsker: Boolean(email && body.notify),
-      status: 'Pending',
+      status: "Pending",
     });
 
     // email the Sheikh AFTER the response is sent, so a mail problem
@@ -54,21 +57,25 @@ export async function POST(request) {
     after(async () => {
       const to = process.env.ADMIN_NOTIFY_EMAIL;
       if (!to) return;
-      const siteUrl = process.env.SITE_URL || 'http://localhost:3000';
-      const preview = question.length > 500 ? `${question.slice(0, 500)}...` : question;
+      const siteUrl = process.env.SITE_URL || "http://localhost:3000";
+      const preview =
+        question.length > 500 ? `${question.slice(0, 500)}...` : question;
       await sendEmail({
         to,
-        subject: 'New question received',
+        subject: "Gaafii Haaraa",
         text:
-          `A new question was submitted:\n\n${preview}\n\n` +
-          `Open it to write the answer (login required):\n` +
+          `Gaafiin Haaraan ergameera :\n\n${preview}\n\n` +
+          `Liinkii armaan gadii kanaan seenii deebii kenni:\n` +
           `${siteUrl}/admin/fatwas/${saved._id}\n`,
       });
     });
 
     return NextResponse.json({ ok: true }, { status: 201 });
   } catch (error) {
-    console.error('POST /api/questions failed:', error);
-    return NextResponse.json({ error: 'Something went wrong.' }, { status: 500 });
+    console.error("POST /api/questions failed:", error);
+    return NextResponse.json(
+      { error: "Something went wrong." },
+      { status: 500 },
+    );
   }
 }

@@ -169,7 +169,7 @@ export default function AnswerForm({ fatwa, categories }) {
 
         {/* Action Buttons */}
         <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm sm:p-6">
-         <div className="flex flex-row flex-wrap items-center justify-center gap-2 sm:gap-3">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-2 sm:gap-3">
             {/* Publish */}
             <button
               type="button"
@@ -212,7 +212,7 @@ export default function AnswerForm({ fatwa, categories }) {
       {/* Success Popup */}
       {showSuccess && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 backdrop-bulr-sm"
           onClick={() => setShowSuccess(false)}
         >
           <div

@@ -51,3 +51,28 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Something went wrong.' }, { status: 500 });
   }
 }
+
+export async function DELETE(request, { params }) {
+  try {
+    const admin = await getAdminFromCookie();
+    if (!admin) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { id } = await params;
+    if (!mongoose.isValidObjectId(id)) {
+      return NextResponse.json({ error: 'Invalid id.' }, { status: 400 });
+    }
+
+    await connectDB();
+    const result = await Fatwa.deleteOne({ _id: id });
+    if (result.deletedCount === 0) {
+      return NextResponse.json({ error: 'Not found.' }, { status: 404 });
+    }
+
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    console.error('DELETE /api/admin/fatwas/[id] failed:', error);
+    return NextResponse.json({ error: 'Something went wrong.' }, { status: 500 });
+  }
+}

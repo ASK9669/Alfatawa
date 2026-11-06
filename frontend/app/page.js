@@ -128,12 +128,12 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="text-center">
             <h2 className="mt-3 text-3xl font-bold text-[#064e35]">
-              QOODAMA FATWAALEE
+              RAMADDII FATWAALEE
             </h2>
 
             <p className="mx-auto mt-3 max-w-2xl text-gray-600">
-              Weebsaayitii kana irratti Fatwaalee Qoodama armaan gadiitiin
-              kaayamu
+              Weebsaayitii kana irratti Fatwaalee Ramaddii armaan gadiitiin
+              Ramadamu
             </p>
           </div>
 
