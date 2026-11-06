@@ -42,9 +42,8 @@ export default function HomePage() {
             <h2
               className="mt-6 text-2xl font-bold leading-loose text-[#064e35] sm:text-4xl"
               dir="rtl"
-            >
-              وَمَا أَرْسَلْنَا مِن قَبْلِكَ إِلَّا رِجَالًا نُّوحِي إِلَيْهِمْ
-              ۚ فَاسْئلُوا أَهْلَ الذِّكْرِ إِن كُنتُمْ لَا تَعْلَمُونَ{" "}
+            >وَمَآ أَرْسَلْنَا مِن قَبْلِكَ إِلَّا رِجَالًا نُّوحِىٓ إِلَيْهِمْ ۚ فَسْـَٔلُوٓا۟ أَهْلَ ٱلذِّكْرِ إِن كُنتُمْ لَا تَعْلَمُونَ 
+
             </h2>
 
             <p className="mx-auto mt-5 max-w-2xl text-base  text-[#064e35] sm:text-lg">
@@ -333,36 +332,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* CALL TO ACTION
-      <section className="px-5 pb-16 sm:px-8">
-        <div className="mx-auto max-w-6xl overflow-hidden rounded-3xl bg-[#075c3b] px-6 py-12 text-center text-white shadow-xl sm:px-12">
-          <span className="text-4xl">📖</span>
-
-          <h2 className="mt-5 text-3xl font-bold">Have an Islamic Question?</h2>
-
-          <p className="mx-auto mt-4 max-w-2xl leading-8 text-green-50">
-            Do not hesitate to seek knowledge. Submit your question and let us
-            help you find scholarly guidance.
-          </p>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/ask"
-              className="rounded-xl bg-[#e8c66b] px-7 py-3.5 font-bold text-[#064e35] transition hover:bg-[#f3d987]"
-            >
-              Ask the Mufti →
-            </Link>
-
-            <Link
-              href="/fatwas"
-              className="rounded-xl border border-white/50 px-7 py-3.5 font-semibold text-white transition hover:bg-white/10"
-            >
-              Read Fatwas
-            </Link>
-          </div>
-        </div>
-      </section> */}
     </main>
   );
 }

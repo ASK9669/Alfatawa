@@ -219,7 +219,7 @@ export default function AnswerForm({ fatwa, categories }) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="success-title"
-            className="w-full max-w-sm animate-in zoom-in-95 rounded-2xl bg-background p-7 text-center shadow-2xl"
+            className="w-full max-w-sm animate-in zoom-in-95 border border-green-600 border-t-7 border-l-7 rounded-2xl bg-white p-7 text-center shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-3xl text-emerald-600">

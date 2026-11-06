@@ -23,7 +23,7 @@ function PlainLinks() {
 
 export default function SiteHeader() {
   return (
-    <header className="border-b bg-surface">
+    <header className="sticky top-0 z-50 border-b bg-surface">
       <div className="mx-auto max-w-3xl px-4 pt-4 pb-2 sm:flex sm:items-center sm:justify-between sm:gap-6 sm:pb-4">
         <Link href="/" className="text-lg font-semibold tracking-tight text-primary">
           {SITE_NAME}
