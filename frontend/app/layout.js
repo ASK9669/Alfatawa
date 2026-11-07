@@ -19,8 +19,9 @@ const plexArabic = IBM_Plex_Sans_Arabic({
 });
 
 export const metadata = {
+    metadataBase: new URL(process.env.SITE_URL || 'http://localhost:3000'),
   title: { default: SITE_NAME, template: `%s | ${SITE_NAME}` },
-  description: "Fatwas in Afaan Oromoo, answered by the Sheikh.",
+  description: "Deebii Gaafilee Islaamaa Afaan Oromootiin Sheekan kannaman",
 };
 
 export default function RootLayout({ children }) {

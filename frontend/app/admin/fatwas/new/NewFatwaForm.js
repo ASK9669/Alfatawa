@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ui } from '@/lib/ui';
+import BackButton from '@/app/admin/BackButton';
 
 export default function NewFatwaForm({ categories }) {
   const router = useRouter();
@@ -62,9 +63,9 @@ export default function NewFatwaForm({ categories }) {
       </div>
 
       <div>
-        <label htmlFor="category" className={ui.label}>Qoodama</label>
+        <label htmlFor="category" className={ui.label}>Ramaddii</label>
         <select id="category" name="category" defaultValue="" className={ui.input}>
-          <option value="">Choose a category</option>
+          <option value="">Ramaddii filadhu</option>
           {categories.map((c) => (
             <option key={c.id} value={c.id}>{c.nameOromo}</option>
           ))}
@@ -93,11 +94,14 @@ export default function NewFatwaForm({ categories }) {
 
       <div className="flex flex-wrap gap-3 border-t pt-6">
         <button type="button" disabled={busy} onClick={(e) => submit(e, true)} className={ui.primary}>
-          {busy ? 'Saving...' : 'Publish'}
+          {busy ? 'Saving...' : 'Maxxansi'}
         </button>
         <button type="button" disabled={busy} onClick={(e) => submit(e, false)} className={ui.secondary}>
           yeroof kaayi
         </button>
+         <span className="ml-4">
+        <BackButton />
+      </span>
       </div>
     </form>
   );

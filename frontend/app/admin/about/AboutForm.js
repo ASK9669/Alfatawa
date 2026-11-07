@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import BackButton from '../BackButton';
 
 export default function AboutForm({ about }) {
   const [message, setMessage] = useState('');
@@ -99,6 +100,9 @@ export default function AboutForm({ about }) {
         className="rounded-lg bg-primary hover:bg-primary-strong px-4 py-2 text-white disabled:opacity-50">
         {busy ? 'Saving...' : 'Save'}
       </button>
+      <span className="ml-4">
+        <BackButton />
+      </span>
     </form>
   );
 }

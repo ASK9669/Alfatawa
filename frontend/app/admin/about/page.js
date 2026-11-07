@@ -26,8 +26,8 @@ async function Content() {
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-8">
-      <Link href="/admin" className="text-sm font-medium text-primary hover:underline">
-        gara daashboordii
+      <Link href="/admin" className="text-sm font-medium text-primary hover:underline bg-gray-100 px-2 py-1 rounded-md">
+        Bahi
       </Link>
       <h1 className="mt-4 text-3xl font-semibold tracking-tight">Edit the About page</h1>
       <AboutForm about={about} />

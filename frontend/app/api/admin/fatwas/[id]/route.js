@@ -105,7 +105,7 @@ export async function PUT(request, { params }) {
           text:
             `Gaafii Fatwaa ati gaafatteef Deebiin isaa lakk ${fatwa.slug} irratti siif deebi'ee jira.\n\n` +
             `Deebii isaa argachuuf liinkii armaan gadii tuqi:\n${siteUrl}/fatwas/${fatwa.slug}\n\n` +
-            `Ergaan kun kan siif ergameef Deebii gaafii keetii siif himuufi` +
+            `Obsaan nu eegachuu keetiif  ` +
             `Galatoomi. Alfataawaa Afaan Oromoo ||Dr Jibriil Qamar||\n`,
         });
         if (result.ok) {

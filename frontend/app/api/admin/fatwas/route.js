@@ -23,10 +23,10 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Question must be 5 to 2000 characters.' }, { status: 400 });
     }
     if (answerOromo.length > 20000) {
-      return NextResponse.json({ error: 'The answer is too long.' }, { status: 400 });
+      return NextResponse.json({ error: 'Deebiin kee Baaayyee Dheeraadha.' }, { status: 400 });
     }
     if (youtubeUrl && !getYouTubeId(youtubeUrl)) {
-      return NextResponse.json({ error: 'The YouTube link is not valid.' }, { status: 400 });
+      return NextResponse.json({ error: 'liinkii YouTube sirrii miti .' }, { status: 400 });
     }
     if (category && !mongoose.isValidObjectId(category)) {
       return NextResponse.json({ error: 'Invalid category.' }, { status: 400 });

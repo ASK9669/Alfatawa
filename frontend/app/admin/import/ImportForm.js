@@ -99,7 +99,6 @@ export default function ImportForm() {
         <span>
           Kallattiidhaan Maxxansi.
           <span className="block text-sm text-muted">
-            If this is off, every fatwa is saved as a draft, to be reviewed and published later.
           </span>
         </span>
       </label>
@@ -163,7 +162,7 @@ export default function ImportForm() {
           onClick={runImport}
           className={ui.primary}
         >
-          Import godhi
+          Maxxansi
         </button>
       </div>
     </div>

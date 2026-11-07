@@ -2,6 +2,7 @@ import { NextResponse, after } from "next/server";
 import { connectDB } from "@/lib/db";
 import Fatwa from "@/models/Fatwa";
 import { sendEmail } from "@/lib/email";
+import { isLimited, getClientIp } from "@/lib/rateLimit";
 
 // simple rate limit: max 5 questions per IP in 10 minutes
 const hits = new Map();
@@ -15,8 +16,8 @@ function tooMany(ip) {
 
 export async function POST(request) {
   try {
-    const ip = request.headers.get("x-forwarded-for") || "unknown";
-    if (tooMany(ip)) {
+         const ip = getClientIp(request);
+      if (await isLimited(`question:${ip}`, 5, 10 * 60)) {
       return NextResponse.json(
         { error: "Too many questions. Please try again later." },
         { status: 429 },
