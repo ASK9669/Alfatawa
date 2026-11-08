@@ -192,7 +192,7 @@ export default function HomePage() {
               },
               {
                 number: "03",
-                title: "Beeksisa Erguu",
+                title: "Deebii Erguu",
                 description:
                   "Deebiin Sheekaa erga maxxanfamee booda beeksifni karaa email keessanii isin qaqqaba",
               },

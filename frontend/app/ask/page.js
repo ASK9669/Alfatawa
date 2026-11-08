@@ -68,7 +68,7 @@ export default function AskPage() {
               </h2>
 
               <p className="mt-3 text-sm leading-7 text-gray-600">
-                Gaafiin kee milkaa'inaan ergameera. Gaafiin kee ilaalamee yeroo
+                 Gaafiin kee ilaalamee yeroo
                 gabaabaa keessatti deebiin isaa ni maxxanfama. Galatoomi
               </p>
 
