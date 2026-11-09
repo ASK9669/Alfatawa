@@ -42,8 +42,10 @@ export default function HomePage() {
             <h2
               className="mt-6 text-2xl font-bold leading-loose text-[#064e35] sm:text-4xl"
               dir="rtl"
-            >وَمَآ أَرْسَلْنَا مِن قَبْلِكَ إِلَّا رِجَالًا نُّوحِىٓ إِلَيْهِمْ ۚ فَسْـَٔلُوٓا۟ أَهْلَ ٱلذِّكْرِ إِن كُنتُمْ لَا تَعْلَمُونَ 
-
+            >
+              وَمَآ أَرْسَلْنَا مِن قَبْلِكَ إِلَّا رِجَالًا نُّوحِىٓ
+              إِلَيْهِمْ ۚ فَسْـَٔلُوٓا۟ أَهْلَ ٱلذِّكْرِ إِن كُنتُمْ لَا
+              تَعْلَمُونَ
             </h2>
 
             <p className="mx-auto mt-5 max-w-2xl text-base  text-[#064e35] sm:text-lg">
@@ -90,10 +92,10 @@ export default function HomePage() {
             <p className="mt-6 max-w-xl text-base leading-8 text-green-50 sm:text-lg">
               Amantiin Islaama namoonni waan hin beekne hayyoota irraa akka
               gaafatan nu barsiisa. Beekumsa sirrii barbaaduufi dhimma amantii
-              keessatti hayyoota gaafatanii hubachuun barbaachisaadha.
-              Weebsaayitiin kun madda beekumsa Amantaa Islaamaa fi qajeelfama shari'aa
-              Afaan Oromootiin isiniif dhiyeessa. Weebsayitii kana irratti
-              Gaafilee Shari'aa gaafachuu, Fatwaalee armaan duraa{" "}
+              keessatti Ulamoota gaafatanii hubachuun barbaachisaadha.
+              Weebsaayitiin kun madda beekumsa Amantaa Islaamaa fi qajeelfama
+              shari'aa Afaan Oromootiin isiniif dhiyeessa. Weebsayitii kana
+              irratti Gaafilee Shari'aa gaafachuu, Fatwaalee armaan duraa{" "}
               <strong>
                 <i>Doktor Jibriil Qamar</i>
               </strong>
@@ -271,8 +273,8 @@ export default function HomePage() {
                 Rakkoolee hawaasaa fura
               </h3>
               <p className="mt-3 text-sm leading-7 text-gray-600">
-                Dhimma jireenya guyyaa guyyaa keessatti Muslimoonni mudatan
-                irratti qajeelfamafi furmaataa ni kenna.
+                Rakkoolee jireenya guyyaa guyyaa keessatti Muslimoonni mudatan
+                irratti qajeelfamaafi furmaataa ni kenna.
               </p>
             </div>
             <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition hover:shadow-md">
@@ -283,7 +285,7 @@ export default function HomePage() {
               </h3>
               <p className="mt-3 text-sm leading-7 text-gray-600">
                 hawaasni muslimaa qur'aana kabajamaafi Hadiisaa ergamaa rabbi
-                (SAW) karaa sirriin akka hubatu ni taasisa
+                (SAW) karaa sirriin akka hubatan ni taasisa
               </p>
             </div>
           </div>
@@ -301,9 +303,9 @@ export default function HomePage() {
             className="mt-6 text-3xl font-bold leading-relaxed sm:text-4xl"
             dir="rtl"
           >
-            فَلَوْلَا نَفَرَ مِن كُلِّ فِرْقَةٍ مِّنْهُمْ طَائِفَةٌ
-            لِّيَتَفَقَّهُوا فِي الدِّينِ ولينذَرُوا قَوْمَهُمْ إِذَا رَجَعُوا
-            إِلَيْهِمْ لَعَلَّهُمْ يَحْذَرُونَ
+            فَلَوۡلَا نَفَرَ مِن كُلِّ فِرۡقَةٖ مِّنۡهُمۡ طَآئِفَةٞ
+            لِّيَتَفَقَّهُواْ فِي ٱلدِّينِ وَلِيُنذِرُواْ قَوۡمَهُمۡ إِذَا
+            رَجَعُوٓاْ إِلَيۡهِمۡ لَعَلَّهُمۡ يَحۡذَرُونَ
           </h2>
 
           <p className="mx-auto mt-6 max-w-3xl leading-8 text-green-50">
@@ -322,8 +324,8 @@ export default function HomePage() {
             </h3>
 
             <p className="mt-4 leading-8 text-green-50">
-              “Rabbiin nama hojii keeyrii isaaf jaalate beekumsa amantii
-              islaamaa isa barsiisa”
+              “nama Rabbiin Keyrii guutuu isaaf fedhe beeka diinii(faqiiha) isa
+              taasisa”
             </p>
 
             <p className="mt-4 text-sm font-semibold text-[#e8c66b]">
@@ -335,3 +337,9 @@ export default function HomePage() {
     </main>
   );
 }
+// sagantaaa Ukuwwaa
+// aasar azzunubi
+// sharhArbaiina Annawaiw
+// Rahmatan Lilalamiin
+// malayasau taajira jahluhu
+//
