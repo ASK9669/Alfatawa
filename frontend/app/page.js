@@ -90,17 +90,17 @@ export default function HomePage() {
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-8 text-green-50 sm:text-lg">
-              Amantiin Islaama namoonni waan hin beekne hayyoota irraa akka
-              gaafatan nu barsiisa. Beekumsa sirrii barbaaduufi dhimma amantii
+              Amantiin Islaama bekumsatti nu ajaja,Ulamaa'ota Gaafannee akka
+              hubannu nu barsiisa. Beekumsa sirrii barbaaduufi dhimma amantii
               keessatti Ulamoota gaafatanii hubachuun barbaachisaadha.
-              Weebsaayitiin kun madda beekumsa Amantaa Islaamaa fi qajeelfama
+              Weebsaayitiin kun Barnootas Amantaa Islaamaa fi qajeelfama
               shari'aa Afaan Oromootiin isiniif dhiyeessa. Weebsayitii kana
               irratti Gaafilee Shari'aa gaafachuu, Fatwaalee armaan duraa{" "}
               <strong>
                 <i>Doktor Jibriil Qamar</i>
               </strong>
-              iin kennaman Ilaaluufi Sagantaalee Muhaadaraa, barnootaafi gorsa
-              Gaggababoo karaa salphaan akka hordoftaniif isin gargaara.
+              iin kennaman Ilaaluufi Sagantaalee Barnootaa akkasumas Muhaadaraaleefi gorsa
+              Gaggababoo karaa salphaan argachhuu dandeessan.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">

@@ -56,7 +56,7 @@ export default function AnswerForm({ fatwa, categories }) {
             : "Gaaffiin kun milkaa'inaan haqameera!";
 
       if (data.emailStatus === "sent") {
-        text += " Gaaffii gaafateef email ergameera.";
+        text += "Abbaa gaafateef email in ergameera.";
       }
 
       if (data.emailStatus === "failed") {
@@ -89,8 +89,7 @@ export default function AnswerForm({ fatwa, categories }) {
           <div className="mb-4">
             <h2 className="text-lg font-bold">Gaaffii</h2>
             <p className="mt-1 text-sm text-muted">
-              Gaaffii namni gaafate sirreessi yoo barbaachise.
-            </p>
+             Gaafii ergame sirreessuun ni danda'ama. </p>
           </div>
           <textarea
             id="questionOromo"
@@ -196,7 +195,7 @@ export default function AnswerForm({ fatwa, categories }) {
               disabled={busy}
               onClick={(e) => {
                 if (
-                  confirm("Reject this question? It will not be published.")
+                  confirm("Gaafii kana  akka in maxxanfamneef haquu barbaadaa?")
                 ) {
                   save(e, "Rejected");
                 }

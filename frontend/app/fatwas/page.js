@@ -108,17 +108,16 @@ async function FatwaBrowser({ searchParams }) {
     <div className="space-y-8">
       {/* Category section */}
       <section>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4">
           <Link
             href={listLink("", q)}
-            className={`rounded-2xl border p-4 text-center transition hover:-translate-y-1 hover:shadow-md ${
+            className={`rounded-2xl border p-2 text-center transition hover:-translate-y-1 hover:shadow-md ${
               !current
                 ? "border-[#087443] bg-[#eaf3e9] shadow-sm"
                 : "border-gray-200 bg-white hover:border-[#c6a84f]"
             }`}
           >
-            <div className="text-2xl">📚</div>
-            <p className="mt-2 text-sm font-bold text-[#064e35]">
+            <p className=" text-sm  inline-block font-bold text-[#064e35]">
               Fatwaalee Hunda
             </p>
           </Link>
@@ -130,15 +129,14 @@ async function FatwaBrowser({ searchParams }) {
               <Link
                 key={c.slug}
                 href={listLink(c.slug, q)}
-                className={`rounded-2xl border p-4 text-center transition hover:-translate-y-1 hover:shadow-md ${
+                className={`rounded-2xl border  text-center transition hover:-translate-y-1 hover:shadow-md ${
                   active
                     ? "border-[#087443] bg-[#eaf3e9] shadow-sm"
                     : "border-gray-200 bg-white hover:border-[#c6a84f]"
                 }`}
               >
-                <div className="text-2xl">{CATEGORY_ICONS[c.slug] || "📖"}</div>
 
-                <p className="mt-2 text-sm font-bold text-[#064e35]">
+                <p className="mt-2 inline-block text-sm font-bold text-[#064e35]">
                   {c.nameOromo}
                 </p>
               </Link>
@@ -175,9 +173,9 @@ async function FatwaBrowser({ searchParams }) {
 
           <button
             type="submit"
-            className="rounded-xl bg-[#087443] px-7 py-3 text-sm font-semibold text-white transition hover:bg-[#064e35]"
+            className="rounded-xl bg-[#087443] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#064e35]"
           >
-            Search
+            Barbaadi
           </button>
         </form>
       </section>
