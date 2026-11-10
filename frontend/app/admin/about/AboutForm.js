@@ -64,7 +64,7 @@ export default function AboutForm({ about }) {
 
 
       <div>
-        <label htmlFor="biographyOromo" className={label}>Biography (Afaan Oromoo)</label>
+        <label htmlFor="biographyOromo" className={label}>Seenaa isaanii </label>
         <textarea id="biographyOromo" name="biographyOromo" rows={8}
           defaultValue={about.biographyOromo} className={input} />
       </div>
@@ -76,13 +76,13 @@ export default function AboutForm({ about }) {
       </div>
 
       <div>
-        <label htmlFor="education" className={label}>Education and teachers (one per line)</label>
+        <label htmlFor="education" className={label}>Tajaajila Hawaasaa</label>
         <textarea id="education" name="education" rows={5}
           defaultValue={about.education} className={input} />
       </div>
 
       <div>
-        <label htmlFor="works" className={label}>Scholarly work (one per line)</label>
+        <label htmlFor="works" className={label}>hojiilee</label>
         <textarea id="works" name="works" rows={5}
           defaultValue={about.works} className={input} />
       </div>
