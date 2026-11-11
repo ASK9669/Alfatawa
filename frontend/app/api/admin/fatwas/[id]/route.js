@@ -4,9 +4,11 @@ import { connectDB } from '@/lib/db';
 import { getAdminFromCookie } from '@/lib/auth';
 import { sendEmail } from '@/lib/email';
 import { getYouTubeId } from '@/components/YouTubeEmbed';
+import { RETENTION_DAYS } from '@/lib/audio';
 import Fatwa from '@/models/Fatwa';
 import Counter from '@/models/Counter';
 import Category from '@/models/Category';
+import Recording from '@/models/Recording';
 
 const ALLOWED_STATUS = ['Draft', 'Published', 'Rejected'];
 
@@ -34,8 +36,8 @@ export async function PUT(request, { params }) {
     if (!ALLOWED_STATUS.includes(status)) {
       return NextResponse.json({ error: 'Invalid status.' }, { status: 400 });
     }
-    if (questionOromo.length < 5 || questionOromo.length > 2000) {
-      return NextResponse.json({ error: 'Question must be 5 to 2000 characters.' }, { status: 400 });
+    if (questionOromo.length > 2000) {
+      return NextResponse.json({ error: 'The question is too long (2000 characters at most).' }, { status: 400 });
     }
     if (answerOromo.length > 20000) {
       return NextResponse.json({ error: 'The answer is too long.' }, { status: 400 });
@@ -65,8 +67,20 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ error: 'Not found.' }, { status: 404 });
     }
 
+    // typed question text is needed to publish, and always needed when there is no recording
+    if ((status === 'Published' || !fatwa.audio) && questionOromo.length < 5) {
+      return NextResponse.json(
+        {
+          error: fatwa.audio
+            ? 'Type the question text before publishing. The website shows text only.'
+            : 'Question must be 5 to 2000 characters.',
+        },
+        { status: 400 }
+      );
+    }
+
     // 3. apply the changes
-    fatwa.questionOromo = questionOromo;
+    fatwa.questionOromo = questionOromo || undefined;
     fatwa.answerOromo = answerOromo;
     fatwa.youtubeUrl = youtubeUrl;
     fatwa.category = category || undefined;
@@ -91,6 +105,14 @@ export async function PUT(request, { params }) {
     }
 
     await fatwa.save();
+
+    // the recording is deleted automatically some time after the question is closed
+    if ((status === 'Published' || status === 'Rejected') && fatwa.audio) {
+      await Recording.updateOne(
+        { _id: fatwa.audio, deleteAt: { $exists: false } },
+        { $set: { deleteAt: new Date(Date.now() + RETENTION_DAYS * 24 * 60 * 60 * 1000) } }
+      );
+    }
 
     // 5. tell the asker (only once, only if they asked for it)
     let emailStatus = 'not_requested';
@@ -127,6 +149,32 @@ export async function PUT(request, { params }) {
     });
   } catch (error) {
     console.error('PUT /api/admin/fatwas/[id] failed:', error);
+    return NextResponse.json({ error: 'Something went wrong.' }, { status: 500 });
+  }
+}
+
+export async function DELETE(request, { params }) {
+  try {
+    const admin = await getAdminFromCookie();
+    if (!admin) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { id } = await params;
+    if (!mongoose.isValidObjectId(id)) {
+      return NextResponse.json({ error: 'Invalid id.' }, { status: 400 });
+    }
+
+    await connectDB();
+    await Recording.deleteMany({ fatwa: id });
+    const result = await Fatwa.deleteOne({ _id: id });
+    if (result.deletedCount === 0) {
+      return NextResponse.json({ error: 'Not found.' }, { status: 404 });
+    }
+
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    console.error('DELETE /api/admin/fatwas/[id] failed:', error);
     return NextResponse.json({ error: 'Something went wrong.' }, { status: 500 });
   }
 }

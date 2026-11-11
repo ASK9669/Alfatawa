@@ -35,6 +35,8 @@ async function Content({ params }) {
     answerOromo: f.answerOromo || "",
     youtubeUrl: f.youtubeUrl || "",
     category: f.category ? String(f.category) : "",
+    audio: f.audio ? String(f.audio) : '',
+    audioSeconds: f.audioSeconds || 0,
   };
 
   return (

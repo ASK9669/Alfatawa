@@ -99,7 +99,7 @@ function FatwaRow({ f }) {
           </div>
 
           <p className="line-clamp-2 text-sm font-medium leading-relaxed group-hover:text-primary">
-            {f.questionOromo}
+            {f.questionOromo || (f.audio ? "🎤 Voice question" : "")}
           </p>
         </div>
 
@@ -130,13 +130,13 @@ async function Dashboard() {
     Fatwa.find({ status: { $in: ["Pending", "Draft"] } })
       .sort({ createdAt: -1 })
       .limit(30)
-      .select("questionOromo status number createdAt")
+      .select("questionOromo status number createdAt audio")
       .lean(),
 
     Fatwa.find({ status: "Published" })
       .sort({ number: -1 })
       .limit(20)
-      .select("questionOromo status number createdAt")
+      .select("questionOromo status number createdAt audio")
       .lean(),
   ]);
 
@@ -303,9 +303,7 @@ export default function AdminPage() {
   return (
     <Suspense
       fallback={
-        <p className="p-8 text-center text-sm text-muted">
-          Loading...
-        </p>
+        <p className="p-8 text-center text-sm text-muted">Loading...</p>
       }
     >
       <Dashboard />

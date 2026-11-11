@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ui } from "@/lib/ui";
 import BackButton from "../../BackButton";
+import AudioPlayer from "./AudioPlayer";
 
 export default function AnswerForm({ fatwa, categories }) {
   const router = useRouter();
@@ -83,13 +84,26 @@ export default function AnswerForm({ fatwa, categories }) {
             {saved.status}
           </span>
         </div>
+              {fatwa.audio && (
+        <div className="rounded-md border bg-surface p-4">
+          <p className="mb-2 text-sm font-semibold">
+            Voice question{fatwa.audioSeconds ? ` (${fatwa.audioSeconds} seconds)` : ''}
+          </p>
+          <AudioPlayer src={`/api/admin/audio/${fatwa.audio}`} />
+          <p className={ui.hint}>
+            Only you can hear this. Type the question below if you want to publish it. The
+            recording is never shown on the website.
+          </p>
+        </div>
+      )}
 
         {/* Question */}
         <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm sm:p-6">
           <div className="mb-4">
             <h2 className="text-lg font-bold">Gaaffii</h2>
             <p className="mt-1 text-sm text-muted">
-             Gaafii ergame sirreessuun ni danda'ama. </p>
+              Gaafii ergame sirreessuun ni danda'ama.{" "}
+            </p>
           </div>
           <textarea
             id="questionOromo"

@@ -6,10 +6,19 @@ const fatwaSchema = new mongoose.Schema(
     slug: { type: String, unique: true, sparse: true },
     titleOromo: String,
     titleArabic: String,
-    questionOromo: { type: String, required: true, maxlength: 2000 },
+    // a voice question may have no typed text; it needs text before it can be published
+    questionOromo: {
+      type: String,
+      maxlength: 2000,
+      required: function () {
+        return !this.audio;
+      },
+    },
     answerOromo: String,
     category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
     youtubeUrl: String,
+    audio: { type: mongoose.Schema.Types.ObjectId, ref: 'Recording' },
+    audioSeconds: Number,
     status: {
       type: String,
       enum: ['Pending', 'Draft', 'Published', 'Rejected'],
