@@ -1,34 +1,39 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { ui } from '@/lib/ui';
+import { useEffect, useRef, useState } from "react";
+import { ui } from "@/lib/ui";
 
 const MAX_SECONDS = 120;
-const TYPES = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus'];
+const TYPES = [
+  "audio/webm;codecs=opus",
+  "audio/webm",
+  "audio/mp4",
+  "audio/ogg;codecs=opus",
+];
 
 function pickType() {
-  return TYPES.find((t) => MediaRecorder.isTypeSupported(t)) || '';
+  return TYPES.find((t) => MediaRecorder.isTypeSupported(t)) || "";
 }
 
 function clock(total) {
   const m = Math.floor(total / 60);
-  const s = String(total % 60).padStart(2, '0');
+  const s = String(total % 60).padStart(2, "0");
   return `${m}:${s}`;
 }
 
 export default function VoiceRecorder({ onChange, labels }) {
   const [supported, setSupported] = useState(true);
-  const [state, setState] = useState('idle'); // idle | recording | done
+  const [state, setState] = useState("idle"); // idle | recording | done
   const [seconds, setSeconds] = useState(0);
-  const [url, setUrl] = useState('');
-  const [error, setError] = useState('');
+  const [url, setUrl] = useState("");
+  const [error, setError] = useState("");
 
   const recorderRef = useRef(null);
   const streamRef = useRef(null);
   const chunksRef = useRef([]);
   const timerRef = useRef(null);
   const startedRef = useRef(0);
-  const urlRef = useRef('');
+  const urlRef = useRef("");
 
   function stopStream() {
     streamRef.current?.getTracks().forEach((t) => t.stop());
@@ -37,7 +42,8 @@ export default function VoiceRecorder({ onChange, labels }) {
 
   useEffect(() => {
     setSupported(
-      Boolean(navigator.mediaDevices?.getUserMedia) && typeof MediaRecorder !== 'undefined'
+      Boolean(navigator.mediaDevices?.getUserMedia) &&
+        typeof MediaRecorder !== "undefined",
     );
     return () => {
       clearInterval(timerRef.current);
@@ -47,11 +53,11 @@ export default function VoiceRecorder({ onChange, labels }) {
   }, []);
 
   function stop() {
-    if (recorderRef.current?.state === 'recording') recorderRef.current.stop();
+    if (recorderRef.current?.state === "recording") recorderRef.current.stop();
   }
 
   async function start() {
-    setError('');
+    setError("");
     try {
       // the microphone permission is asked only now, when the visitor taps Record
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -70,11 +76,14 @@ export default function VoiceRecorder({ onChange, labels }) {
       recorder.onstop = () => {
         clearInterval(timerRef.current);
         stopStream();
-        const type = recorder.mimeType || mimeType || 'audio/webm';
+        const type = recorder.mimeType || mimeType || "audio/webm";
         const blob = new Blob(chunksRef.current, { type });
-        const secs = Math.max(1, Math.round((Date.now() - startedRef.current) / 1000));
+        const secs = Math.max(
+          1,
+          Math.round((Date.now() - startedRef.current) / 1000),
+        );
         if (blob.size === 0) {
-          setState('idle');
+          setState("idle");
           setError(labels.empty);
           return;
         }
@@ -82,7 +91,7 @@ export default function VoiceRecorder({ onChange, labels }) {
         urlRef.current = objectUrl;
         setUrl(objectUrl);
         setSeconds(Math.min(secs, MAX_SECONDS));
-        setState('done');
+        setState("done");
         onChange({ blob, seconds: Math.min(secs, MAX_SECONDS) });
       };
 
@@ -90,7 +99,7 @@ export default function VoiceRecorder({ onChange, labels }) {
       startedRef.current = Date.now();
       setSeconds(0);
       recorder.start();
-      setState('recording');
+      setState("recording");
 
       timerRef.current = setInterval(() => {
         const s = Math.round((Date.now() - startedRef.current) / 1000);
@@ -99,16 +108,16 @@ export default function VoiceRecorder({ onChange, labels }) {
       }, 250);
     } catch (e) {
       stopStream();
-      setError(e?.name === 'NotAllowedError' ? labels.denied : labels.failed);
+      setError(e?.name === "NotAllowedError" ? labels.denied : labels.failed);
     }
   }
 
   function discard() {
     if (urlRef.current) URL.revokeObjectURL(urlRef.current);
-    urlRef.current = '';
-    setUrl('');
+    urlRef.current = "";
+    setUrl("");
     setSeconds(0);
-    setState('idle');
+    setState("idle");
     onChange(null);
   }
 
@@ -123,13 +132,17 @@ export default function VoiceRecorder({ onChange, labels }) {
 
   return (
     <div className="space-y-3 rounded-md border bg-surface p-4">
-      {state === 'idle' && (
-        <button type="button" onClick={start} className={ui.secondary}>
+      {state === "idle" && (
+        <button
+          type="button"
+          onClick={start}
+          className="bg-white border border-green-700 border-l-4 border-t-4 border-green-700 rounded-md px-4 py-2 text-sm font-medium text-black hover:bg-primary-strong"
+        >
           {labels.record}
         </button>
       )}
 
-      {state === 'recording' && (
+      {state === "recording" && (
         <div className="flex flex-wrap items-center gap-4">
           <span className="flex items-center gap-2 font-medium" role="timer">
             <span
@@ -144,7 +157,7 @@ export default function VoiceRecorder({ onChange, labels }) {
         </div>
       )}
 
-      {state === 'done' && (
+      {state === "done" && (
         <div className="space-y-3">
           <audio controls src={url} className="w-full" />
           <div className="flex flex-wrap gap-3">
