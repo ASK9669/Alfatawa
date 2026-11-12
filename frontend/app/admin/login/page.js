@@ -35,7 +35,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="mx-auto max-w-sm px-4 py-12">
+    <main className="mx-auto max-w-sm px-4 py-12 border">
       <div className="rounded-lg border bg-surface p-6">
         <h1 className="text-2xl font-semibold tracking-tight">Admin Qofaafi</h1>
         <form onSubmit={handleSubmit} className="mt-6 space-y-5">

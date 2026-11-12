@@ -32,6 +32,7 @@ async function AboutContent() {
 
       {a.biographyOromo && (
         <section>
+          <h2 className="mb-2 text-lg font-semibold">Seenaa jireenya</h2>
           <p className="whitespace-pre-line">{a.biographyOromo}</p>
         </section>
       )}
@@ -45,7 +46,7 @@ async function AboutContent() {
 
       {education.length > 0 && (
         <section>
-          <h2 className="mb-2 text-lg font-semibold">Education and teachers</h2>
+          <h2 className="mb-2 text-lg font-semibold">Tajaajila Hawaasaa(Suudan)</h2>
           <ul className="list-disc space-y-1 pl-5">
             {education.map((item, i) => <li key={i}>{item}</li>)}
           </ul>
@@ -54,7 +55,7 @@ async function AboutContent() {
 
       {works.length > 0 && (
         <section>
-          <h2 className="mb-2 text-lg font-semibold">Scholarly work</h2>
+          <h2 className="mb-2 text-lg font-semibold">Tajaajila Hawaasaa(Itiyoophiyaa)</h2>
           <ul className="list-disc space-y-1 pl-5">
             {works.map((item, i) => <li key={i}>{item}</li>)}
           </ul>
