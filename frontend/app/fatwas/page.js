@@ -102,7 +102,7 @@ async function FatwaBrowser({ searchParams }) {
     categories.map((c) => [String(c._id), c.nameOromo]),
   );
 
-  const activeCategory = current?.nameOromo || "All Fatwas";
+  const activeCategory = current?.nameOromo || "Fatwaalee Hunda";
 
   return (
     <div className="space-y-8">

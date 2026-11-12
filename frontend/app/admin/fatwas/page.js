@@ -104,7 +104,7 @@ async function List({ searchParams }) {
           defaultValue={q}
           maxLength={100}
           aria-label="Search fatwas"
-          placeholder="Search by word or fatwa number"
+          placeholder="jecha ykn lakkoofsaan baarbaadi"
           className="min-w-0 flex-1 rounded-md border bg-surface px-3 py-2.5"
         />
         {status && <input type="hidden" name="status" value={status} />}
@@ -112,7 +112,7 @@ async function List({ searchParams }) {
           type="submit"
           className="rounded-md bg-primary px-5 py-2.5 font-medium text-white hover:bg-primary-strong"
         >
-          Search
+          Barbaadi
         </button>
       </form>
 
@@ -209,10 +209,10 @@ export default function AllFatwasPage({ searchParams }) {
         href="/admin"
         className="text-sm font-medium text-primary hover:underline"
       >
-        Back to dashboard
+        Bahi
       </Link>
       <h1 className="mt-4 mb-6 text-3xl font-semibold tracking-tight">
-        All fatwas
+        Fatwaa Hunda
       </h1>
       <Suspense fallback={<p className="text-muted">Loading...</p>}>
         <List searchParams={searchParams} />

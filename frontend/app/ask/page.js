@@ -7,8 +7,8 @@ import BackButton from "../admin/BackButton";
 
 // All page text is kept here for easy translation.
 const T = {
-  title: "Gaafii kee Gaafadhuu",
-  intro: "Gaafii kee Sagalee ykn Barreeffama barreessuun gaafachuu dandeessa.",
+  title: "Fatwaa Gaafadhuu",
+  intro: "Gaafii kee Barreeffamaan ykn Sagaleen gaafachuu dandeessa.",
   how: "Filadhu",
   modeVoice: "Sagalee",
   modeText: "Barreeffama",
@@ -192,8 +192,8 @@ export default function AskPage() {
       <div className="mx-auto max-w-2xl">
         {/* HEADER */}
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-green-100 text-3xl text-green-800">
-            ☪
+          <div className="text-center justify-center flex">
+            <img src="kuran.png" alt="Ask" className="h-auto w-auto rounded-4xl" />
           </div>
 
           <h1 className="text-3xl font-bold tracking-tight text-green-900 sm:text-4xl">

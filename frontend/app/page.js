@@ -34,6 +34,10 @@ export default function HomePage() {
         <section className="px-5 py-16 sm:px-8">
           <div className="mx-auto max-w-5xl rounded-3xl border border-[#e5d4a1] bg-white px-6 py-10 text-center shadow-sm sm:px-12">
             <span className="text-sm font-bold tracking-widest text-[#a78328]">
+              <h1 className="mt-4 text-3xl font-extrabold leading-tight text-red-500 bg-red-100 border border-red-200 px-4 py-2 rounded-md tracking-tight sm:text-3xl lg:text-6xl">
+               SAMPLE AND TESTING PHASE
+              </h1>
+              
               <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-3xl lg:text-6xl">
                 Al-Fataawaa Afaan Oromoo
               </h1>
