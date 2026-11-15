@@ -23,21 +23,21 @@ function PlainLinks() {
 
 export default function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b bg-surface">
-      <div className="mx-auto max-w-3xl px-4 pt-4 pb-2 sm:flex sm:items-center sm:justify-between sm:gap-6 sm:pb-4">
+    <header className="sticky top-0 z-50 border-b  ">
+      <div className="mx-auto max-w-3xl px-4 pt-4 pb-2  sm:flex sm:items-center sm:justify-between sm:gap-6 sm:pb-4">
         <Link href="/" className="flex items-center gap-3">
           <img
             src="/favicon.ico"
             alt=""
             width={36}
             height={36}
-            className="h-9 w-9 shrink-0 rounded object-contain"
+            className="h-9 w-9 shrink-0 rounded-full object-contain"
           />
-          <span className="text-lg font-semibold tracking-tight text-primary">
+          <span className="text-lg font-semibold tracking-tight  text-primary">
             {SITE_NAME}
           </span>
         </Link>
-        <nav aria-label="Main menu" className="mt-2 sm:mt-0">
+        <nav aria-label="Main menu" className="mt-2 sm:mt-0 sm:flex-1">
           <Suspense fallback={<PlainLinks />}>
             <NavLinks links={LINKS} />
           </Suspense>

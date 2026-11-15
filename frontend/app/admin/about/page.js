@@ -29,7 +29,7 @@ async function Content() {
       <Link href="/admin" className="text-sm font-medium text-primary hover:underline bg-gray-100 px-2 py-1 rounded-md">
         Bahi
       </Link>
-      <h1 className="mt-4 text-3xl font-semibold tracking-tight">Edit the About page</h1>
+      <h1 className="mt-4 text-3xl font-semibold tracking-tight">Seenaa Sheekaa sirreessuuf</h1>
       <AboutForm about={about} />
     </main>
   );

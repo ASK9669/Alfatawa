@@ -42,7 +42,7 @@ export default function AboutForm({ about }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="nameOromo" className={label}>Name (Afaan Oromoo)</label>
+        <label htmlFor="nameOromo" className={label}>maqaa</label>
         <input id="nameOromo" name="nameOromo" defaultValue={about.nameOromo} className={input} />
       </div>
 
@@ -76,19 +76,19 @@ export default function AboutForm({ about }) {
       </div>
 
       <div>
-        <label htmlFor="education" className={label}>Tajaajila Hawaasaa</label>
+        <label htmlFor="education" className={label}>Tajaajila Hawaasaa(Sudaan)</label>
         <textarea id="education" name="education" rows={5}
           defaultValue={about.education} className={input} />
       </div>
 
       <div>
-        <label htmlFor="works" className={label}>hojiilee</label>
+        <label htmlFor="works" className={label}>Tajaajila Hawaasaa(Itiyoophiyaa)</label>
         <textarea id="works" name="works" rows={5}
           defaultValue={about.works} className={input} />
       </div>
 
       <div>
-        <label htmlFor="timeline" className={label}>Timeline (one per line, like: 1990 | Event)</label>
+        <label htmlFor="timeline" className={label}></label>
         <textarea id="timeline" name="timeline" rows={6}
           defaultValue={about.timeline} className={input} />
       </div>

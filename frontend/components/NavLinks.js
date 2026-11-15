@@ -15,8 +15,8 @@ export default function NavLinks({ links }) {
             <Link
               href={l.href}
               aria-current={active ? 'page' : undefined}
-              className={`block whitespace-nowrap rounded-md px-3 py-2.5 text-sm font-medium ${
-                active ? 'bg-primary text-white' : 'hover:bg-primary/10'
+              className={`block whitespace-nowrap rounded-md px-2 py-2 text-sm font-medium ${
+                active ? 'bg-primary/45  border border-t-4 border-l-4 border-green-500 text-black' : 'hover:bg-primary/10' + ' hover:border hover:border-green-500 hover:border-t-5'
               }`}
             >
               {l.label}
