@@ -23,8 +23,8 @@ function PlainLinks() {
 
 export default function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b  ">
-      <div className="mx-auto max-w-3xl px-4 pt-4 pb-2  sm:flex sm:items-center sm:justify-between sm:gap-6 sm:pb-4">
+    <header className="sticky top-0 z-50 border-b bg-white ">
+      <div className="mx-auto max-w-3xl px-4 pt-4 pb-2 bg-white  sm:flex sm:items-center sm:justify-between sm:gap-6 sm:pb-4">
         <Link href="/" className="flex items-center gap-3">
           <img
             src="/favicon.ico"
