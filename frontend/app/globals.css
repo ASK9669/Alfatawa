@@ -1,4 +1,7 @@
+
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --paper: #f7f9f8;
@@ -9,6 +12,18 @@
   --primary: #0f5c47;
   --primary-strong: #0a4637;
   --accent: #a8641a;
+}
+
+/* Dark theme */
+.dark {
+  --paper: #101c19;
+  --surface: #1b2b26;
+  --ink: #e5eee9;
+  --muted: #a7b9af;
+  --line: #344a40;
+  --primary: #55b895;
+  --primary-strong: #75d0ad;
+  --accent: #e5a34e;
 }
 
 @theme inline {
@@ -23,7 +38,6 @@
 }
 
 @layer base {
-  /* Tailwind 4 draws borders in black by default; use our soft line color */
   *,
   ::after,
   ::before {
@@ -42,3 +56,125 @@
     outline-offset: 2px;
   }
 }
+/* ---------- light and dark colors ---------- */
+@theme inline {
+  --color-primary-text: var(--primary-text);
+}
+
+:root {
+  --primary-text: #0f5c47;
+  color-scheme: light;
+}
+
+:root.dark {
+  --paper: #0e1716;
+  --surface: #15211f;
+  --ink: #e8f0ee;
+  --muted: #a3b5af;
+  --line: #2b3d39;
+  --primary: #2a8566;
+  --primary-strong: #1f6e53;
+  --primary-text: #6fd0ab;
+  --accent: #e3a857;
+  color-scheme: dark;
+}
+
+/* green text becomes a lighter green on dark pages, so it stays easy to read */
+.dark .text-primary {
+  color: var(--primary-text);
+}
+/* ---------- dark mode for the colors typed directly in the pages ---------- */
+:root.dark {
+  --d-page: #0e1716;
+  --d-section: #111e1c;
+  --d-card: #15211f;
+  --d-soft: #1a2927;
+  --d-tint: #1b3a31;
+  --d-tint2: #1d4a3c;
+  --d-line: #2b3d39;
+  --d-ink: #e8f0ee;
+  --d-ink2: #c3d1cc;
+  --d-ink3: #a3b5af;
+  --d-ink4: #8fa19b;
+  --d-green: #6fd0ab;
+  --d-gold: #e8c66b;
+  --d-gold-tint: #3a3220;
+  --d-red-tint: #3b1616;
+  --d-red-text: #fca5a5;
+  --d-red-text2: #f87171;
+  --d-amber-tint: #3a2c12;
+  --d-amber-text: #fcd34d;
+}
+
+/* backgrounds */
+.dark .bg-white { background-color: var(--d-card); }
+.dark .hover\:bg-white:hover { background-color: var(--d-soft); }
+.dark .focus\:bg-white:focus { background-color: var(--d-card); }
+.dark .bg-\[\#fafaf5\] { background-color: var(--d-page); }
+.dark .bg-\[\#fafaf7\] { background-color: var(--d-page); }
+.dark .bg-\[\#f7faf7\] { background-color: var(--d-page); }
+.dark .bg-\[\#f0f5ed\] { background-color: var(--d-section); }
+.dark .bg-gray-50 { background-color: var(--d-soft); }
+.dark .bg-gray-100 { background-color: var(--d-soft); }
+.dark .bg-\[\#eaf3e9\] { background-color: var(--d-tint); }
+.dark .bg-green-50 { background-color: var(--d-tint); }
+.dark .bg-green-50\/50 { background-color: var(--d-tint); }
+.dark .hover\:bg-green-50\/50:hover { background-color: var(--d-tint); }
+.dark .bg-emerald-50 { background-color: var(--d-tint); }
+.dark .bg-green-100 { background-color: var(--d-tint2); }
+.dark .bg-emerald-100 { background-color: var(--d-tint2); }
+.dark .bg-\[\#f8f2df\] { background-color: var(--d-gold-tint); }
+.dark .bg-amber-50 { background-color: var(--d-amber-tint); }
+.dark .bg-red-50 { background-color: var(--d-red-tint); }
+.dark .hover\:bg-red-50:hover { background-color: var(--d-red-tint); }
+.dark .bg-red-100 { background-color: #4a1c1c; }
+
+/* borders */
+.dark .border-gray-100 { border-color: var(--d-line); }
+.dark .border-gray-200 { border-color: var(--d-line); }
+.dark .border-gray-300 { border-color: var(--d-line); }
+.dark .border-stone-200 { border-color: var(--d-line); }
+.dark .border-\[\#e8e4d5\] { border-color: var(--d-line); }
+.dark .border-\[\#e5d4a1\] { border-color: var(--d-line); }
+.dark .border-\[\#e3dfce\] { border-color: var(--d-line); }
+.dark .border-green-100 { border-color: #24463b; }
+.dark .border-green-200 { border-color: #24463b; }
+.dark .border-red-100 { border-color: #5b2626; }
+.dark .border-red-200 { border-color: #5b2626; }
+
+/* gray and black text */
+.dark .text-gray-900 { color: var(--d-ink); }
+.dark .text-gray-800 { color: var(--d-ink); }
+.dark .text-gray-700 { color: var(--d-ink2); }
+.dark .text-gray-600 { color: var(--d-ink3); }
+.dark .text-gray-500 { color: var(--d-ink3); }
+.dark .text-gray-400 { color: var(--d-ink4); }
+.dark .placeholder\:text-gray-400::placeholder { color: var(--d-ink4); }
+.dark .text-black:not(.bg-yellow-500):not(.bg-\[\#e8c66b\]) { color: var(--d-ink); }
+
+/* green text becomes light green (but stays dark on gold buttons) */
+.dark .text-\[\#064e35\]:not(.bg-\[\#e8c66b\]) { color: var(--d-green); }
+.dark .text-\[\#087443\] { color: var(--d-green); }
+.dark .text-\[\#075c3b\] { color: var(--d-green); }
+.dark .text-green-700 { color: var(--d-green); }
+.dark .text-green-800 { color: var(--d-green); }
+.dark .text-green-900 { color: var(--d-green); }
+.dark .text-emerald-600 { color: var(--d-green); }
+.dark .text-emerald-700 { color: var(--d-green); }
+.dark .text-emerald-800 { color: var(--d-green); }
+.dark .hover\:text-emerald-700:hover { color: var(--d-green); }
+
+/* gold, red and amber text */
+.dark .text-\[\#a78328\] { color: var(--d-gold); }
+.dark .text-\[\#987522\] { color: var(--d-gold); }
+.dark .text-red-700 { color: var(--d-red-text); }
+.dark .text-red-800 { color: var(--d-red-text); }
+.dark .text-red-600 { color: var(--d-red-text2); }
+.dark .text-red-500 { color: var(--d-red-text2); }
+.dark .text-amber-700 { color: var(--d-amber-text); }
+
+/* rings */
+.dark .ring-gray-200 { --tw-ring-color: var(--d-line); }
+.dark .ring-emerald-200 { --tw-ring-color: #1f4d3d; }
+.dark .ring-amber-200 { --tw-ring-color: #5a4515; }
+.dark .focus\:ring-green-100:focus { --tw-ring-color: #1f4d3d; }

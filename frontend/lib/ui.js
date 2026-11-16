@@ -7,7 +7,9 @@ export const ui = {
   secondary:
     'rounded-md border bg-surface px-5 py-2.5 font-medium hover:border-primary disabled:opacity-50',
   danger:
-    'rounded-md border border-red-700 bg-surface px-5 py-2.5 font-medium text-red-700 hover:bg-red-50 disabled:opacity-50',
-  error: 'rounded-md border border-red-700 bg-red-50 px-3 py-2 text-sm text-red-800',
-  success: 'rounded-md border border-primary bg-primary/10 px-3 py-2 text-sm text-primary-strong',
+    'rounded-md border border-red-700 bg-surface px-5 py-2.5 font-medium text-red-700 hover:bg-red-50 disabled:opacity-50 dark:border-red-400 dark:text-red-300 dark:hover:bg-red-950',
+  error:
+    'rounded-md border border-red-700 bg-red-50 px-3 py-2 text-sm text-red-800 dark:border-red-400 dark:bg-red-950 dark:text-red-200',
+  success:
+    'rounded-md border border-primary bg-primary/10 px-3 py-2 text-sm text-primary-strong dark:text-primary-text',
 };

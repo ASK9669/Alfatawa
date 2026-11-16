@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import NavLinks from "./NavLinks";
+import ThemeToggle from "./ThemeToggle";
 import { SITE_NAME, LINKS } from "@/lib/site";
 
 // shown for an instant while the browser works out which page is open
@@ -23,9 +24,9 @@ function PlainLinks() {
 
 export default function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b bg-white ">
-      <div className="mx-auto max-w-3xl px-4 pt-4 pb-2 bg-white  sm:flex sm:items-center sm:justify-between sm:gap-6 sm:pb-4">
-        <Link href="/" className="flex items-center gap-3">
+    <header className="sticky top-0 z-50 border-b bg-white dark:bg-surface">
+      <div className="relative mx-auto max-w-3xl px-4 pt-4 pb-2 bg-white dark:bg-surface sm:flex sm:items-center sm:justify-between sm:gap-6 sm:pb-4">
+        <Link href="/" className="flex items-center gap-3 pe-12 sm:pe-0">
           <img
             src="/favicon.ico"
             alt=""
@@ -42,6 +43,9 @@ export default function SiteHeader() {
             <NavLinks links={LINKS} />
           </Suspense>
         </nav>
+        <div className="absolute end-4 top-3.5 sm:static">
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

@@ -4,49 +4,54 @@ import { FaFacebook, FaTelegram } from "react-icons/fa";
 import { FaTiktok } from "react-icons/fa6";
 export default function SiteFooter() {
   return (
-    <footer className="mt-16 border-t bg-black text-sm text-white">
-      <div className="mx-auto grid max-w-3xl gap-6 p-6 sm:grid-cols-2">
-        <div>
-          <p className="mt-1 font-semibold text-sm text-white">
-            Social Medias:
-          </p>
-        </div>
-        <div className="flex flex-col gap-2 ">
-          <ul className="flex flex-wrap gap-10  font-bold text-md text-white ">
-            <div className="hover:text-blue-500 rounded-full bg-gray-200 p-1 transition-transform hover:scale-110">
+    <footer className="mt-8 border-t border-line bg-green-900 text-white">
+      <div className="mx-auto max-w-6xl px-6 py-1">
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3">
+          {/* Website information */}
+
+          <div className="mt-3 flex items-center gap-8">
+            <h5 className="text-lg font-bold text-white">
+              Social Media
+            </h5>
+
+            
               <a
                 href="https://web.facebook.com/profile.php?id=100084981543645"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="text-[#1877F2] transition-transform hover:scale-110"
+                className="rounded-full bg-white/10 p-3 text-white transition-all hover:-translate-y-1 hover:bg-[#1877F2]"
               >
-                <FaFacebook className="h-6 w-6" />
+                <FaFacebook size={22} />
               </a>
-            </div>
-            <div className="bg-gray-200 hover:text-blue-500 rounded-full p-1 transition-transform hover:scale-110">
+
               <a
                 href="https://t.me/drjibrilkemerofficial"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Telegram"
-                className="text-[#229ED9] transition-transform hover:scale-110"
+                className="rounded-full bg-white/10 p-3 text-white transition-all hover:-translate-y-1 hover:bg-[#229ED9]"
               >
-                <FaTelegram className="h-6 w-6" />
+                <FaTelegram size={22} />
               </a>
-            </div>
-            <div className="hover:text-blue-500 rounded-full bg-gray-200 p-1 transition-transform hover:scale-110">
+
               <a
                 href="https://www.tiktok.com/@drjibrilqamar12"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TikTok"
-                className="inline-flex items-center text-black transition-transform hover:scale-110"
+                className="rounded-full bg-white/10 p-3 text-white transition-all hover:-translate-y-1 hover:bg-white hover:text-black"
               >
-                <FaTiktok size={26} />
+                <FaTiktok size={22} />
               </a>
             </div>
-          </ul>
+          
+        </div>
+        <div className="border-t border-white/20 pt-5 text-center">
+          <p className="text-sm text-green-100">
+            © 2026 Al-Fataawaa Afaan Oromoo. Mirgi hundi
+            seeraan eegamaadha.
+          </p>
         </div>
       </div>
     </footer>

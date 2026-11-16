@@ -4,6 +4,8 @@ import SiteFooter from "@/components/SiteFooter";
 import { SITE_NAME } from "@/lib/site";
 import "./globals.css";
 
+// sets the saved or system theme before the page is drawn, so there is no flash of the wrong colors
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark'){document.documentElement.classList.add('dark');}}catch(e){}})();`;
 const plex = IBM_Plex_Sans({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700"],
@@ -19,14 +21,22 @@ const plexArabic = IBM_Plex_Sans_Arabic({
 });
 
 export const metadata = {
-    metadataBase: new URL(process.env.SITE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(process.env.SITE_URL || "http://localhost:3000"),
   title: { default: SITE_NAME, template: `%s | ${SITE_NAME}` },
   description: "Alfataawaa Afaan Oromoo||Dr Jibriil Qamar",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${plex.variable} ${plexArabic.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${plex.variable} ${plexArabic.variable}`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+
       <body className="flex min-h-screen flex-col">
         <SiteHeader />
         <div className="flex-1">{children}</div>
